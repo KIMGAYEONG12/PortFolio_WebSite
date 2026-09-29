@@ -68,7 +68,7 @@ git init
 git add .
 git commit -m "feat: 포트폴리오 사이트 초기 커밋"
 git branch -M main
-git remote add origin https://github.com/내아이디/portfolio.git
+git remote add origin https://github.com/KIMGAYEONG12/PortFolio_WebSite.git
 git push -u origin main
 ```
 
@@ -86,3 +86,15 @@ git push -u origin main
 - `email`, `github` 값을 본인 정보로 교체하세요.
 - 배포 후 주소(예: `https://내프로젝트.vercel.app`)를 공유하면 누구나 볼 수 있습니다.
 - Vercel에서 `Settings → Domains`로 내 도메인도 연결할 수 있습니다.
+
+## Vercel 말고 다른 배포 방법
+
+| 방법 | 특징 | 설정 |
+| --- | --- | --- |
+| **Netlify** | GitHub 저장소 연결만으로 자동 배포, Next.js 지원 | `Add new site → Import from Git` 후 그대로 Deploy |
+| **Cloudflare Pages** | 전 세계 CDN, 무료 한도가 넉넉함 | 저장소 연결 후 Next.js 프리셋 선택 (일부 기능은 추가 설정 필요) |
+| **GitHub Pages** | 이미 올린 저장소에서 바로 공개, 정적 사이트 전용 | `next.config.mjs`에 `output: "export"` 추가, 저장소 이름 경로면 `basePath: "/PortFolio_WebSite"`도 추가 후 Actions로 `out/` 배포 |
+| **Firebase Hosting** | Google 계정만 있으면 가능 | `firebase init hosting`에서 Next.js 선택 후 `firebase deploy` |
+
+이 프로젝트는 서버 기능이 없어서(정적 페이지 + 브라우저 저장소) 위 방법 모두 사용할 수 있습니다.
+요금·한도는 서비스별로 바뀌므로 배포 전에 각 공식 페이지에서 확인하세요.

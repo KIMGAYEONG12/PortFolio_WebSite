@@ -38,19 +38,18 @@ export const defaultProfile: Profile = {
   description:
     "홍길동의 프론트 및 웹 앱 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.",
 
-  // TODO: 본인 이메일 / GitHub 주소로 교체
+  // TODO: 이메일은 본인 주소로 교체 (GitHub 주소는 설정 완료)
   email: "your-email@example.com",
-  github: "https://github.com/your-id",
+  github: "https://github.com/KIMGAYEONG12",
 
   photo: "",
 
   about: [
-    "Next.js와 TypeScript로 화면을 만들고, PHP·SQLite·MySQL 기반의 서버 코드도 이해하며 작업합니다.",
-    "Figma 디자인을 HTML/CSS로 옮기는 일부터 팀 프로젝트의 API 연동까지 경험했습니다. 화면이 화려한 것보다 처음 쓰는 사람이 막히지 않는 것이 더 중요하다고 생각합니다.",
+    "Next.js와 TypeScript로 사용자가 마주하는 화면을 만들고, PHP·MySQL·SQLite 기반의 서버 코드까지 이해하며 프런트와 백엔드 사이를 매끄럽게 잇습니다.",
+    "Figma 디자인을 HTML/CSS로 옮기는 일부터 팀 프로젝트의 API 연동까지 경험했습니다. 화려함보다 처음 쓰는 사람도 막히지 않는 사용성을 더 중요하게 생각합니다.",
   ],
 
   facts: [
-    { label: "교육", value: "생성형 AI 기반 UI/UX디자인 & 웹앱 콘텐츠 개발 과정" },
     {
       label: "관심 분야",
       value: "지도·좌석 현황처럼 상태가 자주 바뀌는 화면, 반응형 UI, 웹 접근성",

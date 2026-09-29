@@ -108,7 +108,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 3;
+export const DATA_VERSION = 4;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
@@ -125,6 +125,15 @@ export function migrateProfile(p: Profile): Profile {
   if (next.role === OLD_ROLE || next.role === OLD_ROLE_V2) next.role = defaultProfile.role;
   if (next.roleEn === OLD_ROLE_EN) next.roleEn = defaultProfile.roleEn;
   if (next.description === OLD_DESC) next.description = defaultProfile.description;
+
+  // v3 → v4: 소개 항목에서 "교육" 제거, GitHub 주소·소개 글 갱신 (직접 바꾼 값은 유지)
+  next.facts = next.facts.filter(
+    (f) => !(f.label === "교육" && f.value.startsWith("생성형 AI 기반 UI/UX디자인")),
+  );
+  if (next.github === "https://github.com/your-id") next.github = defaultProfile.github;
+  if (next.about.length === 2 && next.about[0].startsWith("Next.js와 TypeScript로 화면을 만들고, PHP·SQLite·MySQL")) {
+    next.about = [...defaultProfile.about];
+  }
 
   const hasFlutter = next.skills.some((g) => g.items.some((i) => /flutter|플러터/i.test(i)));
   if (!hasFlutter) {
