@@ -39,10 +39,10 @@ export const defaultProfile: Profile = {
     "홍길동의 프론트 및 웹 앱 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.",
 
   // TODO: 이메일은 본인 주소로 교체 (GitHub 주소는 설정 완료)
-  email: "your-email@example.com",
+  email: "kboy14@naver.com",
   github: "https://github.com/KIMGAYEONG12",
 
-  photo: "",
+  photo: "/profile.jpg",
 
   about: [
     "Next.js와 TypeScript로 사용자가 마주하는 화면을 만들고, PHP·MySQL·SQLite 기반의 서버 코드까지 이해하며 프런트와 백엔드 사이를 매끄럽게 잇습니다.",
@@ -64,10 +64,22 @@ export const defaultProfile: Profile = {
   skills: [
     {
       group: "프론트엔드",
-      items: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Next.js", "Zustand", "Flutter"],
+      items: [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Zustand",
+        "Flutter",
+      ],
     },
     { group: "백엔드 · DB", items: ["PHP", "Laravel", "MySQL", "SQLite"] },
-    { group: "디자인 · 협업", items: ["Figma", "Git / GitHub", "Postman", "Vercel"] },
+    {
+      group: "디자인 · 협업",
+      items: ["Figma", "Git / GitHub", "Postman", "Vercel"],
+    },
     { group: "학습 중", items: ["React Native", "Java"] },
   ],
 
