@@ -8,14 +8,14 @@ import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: {
-    default: `${profile.name} | ${profile.role} 포트폴리오`,
+    default: `${profile.name} | 프론트엔드 개발자`,
     template: `%s | ${profile.name}`,
   },
   description: profile.description,
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    title: `${profile.name} | ${profile.role} 포트폴리오`,
+    title: `${profile.name} | 프론트엔드 개발자`,
     description: profile.description,
   },
 };
@@ -31,7 +31,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ko">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@200;300;400;500&display=swap"
