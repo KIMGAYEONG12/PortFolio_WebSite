@@ -45,7 +45,7 @@ export const projects: Project[] = [
     problems: [],
     retrospective: [],
     live: "https://sisenongbu.vercel.app",
-    github: "https://github.com/KIMGAYEONG12/sise_nongbu",
+    github: "",
     images: [],
   },
   {
