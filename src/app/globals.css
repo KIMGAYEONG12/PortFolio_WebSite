@@ -1494,3 +1494,216 @@ a {
 #skills .meta-row dd {
   color: var(--ink);
 }
+
+/* ── 기술 카드 ── */
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 26px 28px 30px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--surface) 100%);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+.skill-card:hover {
+  transform: translateY(-3px);
+  border-color: #d6d6dd;
+  box-shadow: 0 14px 32px -18px rgba(27, 27, 31, 0.28);
+}
+.skill-card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.skill-index {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+.skill-group {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.skill-chip {
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--ink);
+  font-size: 0.875rem;
+  line-height: 1.2;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.skill-chip:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #ffffff;
+}
+.skill-card.is-learning .skill-chip {
+  border-style: dashed;
+  background: transparent;
+}
+@media (max-width: 720px) {
+  .skill-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .skill-card {
+    padding: 22px 22px 26px;
+  }
+}
+
+/* ── 메일 작성 창 (Gmail 스타일) ── */
+button.contact-mail {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+}
+.compose {
+  position: fixed;
+  right: 24px;
+  bottom: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 12px 40px -8px rgba(27, 27, 31, 0.35);
+  animation: compose-in 0.22s ease-out;
+}
+@keyframes compose-in {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+.compose-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 8px 10px 16px;
+  border-radius: 12px 12px 0 0;
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.compose-close {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+.compose-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+.compose-form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.compose-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--line);
+}
+.compose-row span {
+  flex: none;
+  width: 72px;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+.compose-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9375rem;
+}
+.compose-row input[readonly] {
+  color: var(--muted);
+}
+.compose-body {
+  width: 100%;
+  min-height: 220px;
+  padding: 14px 16px;
+  border: 0;
+  outline: 0;
+  resize: none;
+  font: inherit;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.compose-foot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px 16px;
+}
+.compose-done {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 28px 20px 24px;
+}
+.compose-done-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.compose-done .btn {
+  margin-top: 12px;
+}
+@media (max-width: 560px) {
+  .compose {
+    right: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+  }
+  .compose-head {
+    border-radius: 0;
+  }
+  .compose-body {
+    flex: 1;
+  }
+}

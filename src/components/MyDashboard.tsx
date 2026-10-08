@@ -22,12 +22,10 @@ export default function MyDashboard() {
     profile,
     projects,
     ready,
+    canEdit,
     saveError,
     updateProfile,
     deleteProject,
-    resetAll,
-    exportData,
-    importData,
     toast,
   } = usePortfolio();
 
@@ -39,7 +37,6 @@ export default function MyDashboard() {
   const [confirm, setConfirm] = useState<ConfirmState>(null);
 
   const photoInput = useRef<HTMLInputElement>(null);
-  const importInput = useRef<HTMLInputElement>(null);
 
   const skillCount = profile.skills.reduce((sum, g) => sum + g.items.length, 0);
 
@@ -108,38 +105,20 @@ export default function MyDashboard() {
     });
   }
 
-  /* ── 데이터 관리 ── */
-  function onExport() {
-    const blob = new Blob([exportData()], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "portfolio-data.json";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-    toast("데이터를 내보냈어요");
-  }
-  async function onImport(e: ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    e.target.value = "";
-    if (!file) return;
-    const text = await file.text();
-    const result = importData(text);
-    toast(result.ok ? "데이터를 가져왔어요" : result.error ?? "가져오기에 실패했어요");
-  }
-  function askReset() {
-    setConfirm({
-      title: "기본값으로 초기화",
-      message: "프로필과 프로젝트를 모두 처음 상태로 되돌릴까요? 지금까지 수정한 내용이 사라져요.",
-      okLabel: "초기화",
-      onOk: () => {
-        resetAll();
-        setConfirm(null);
-        toast("기본값으로 되돌렸어요");
-      },
-    });
+  if (ready && !canEdit) {
+    return (
+      <div className="container my is-ready">
+        <header className="my-head">
+          <p className="eyebrow">MY</p>
+          <h1 className="my-title">관리 화면은 비공개예요</h1>
+          <p className="my-lead">
+            <Link href="/" className="text-link">
+              홈으로 돌아가기
+            </Link>
+          </p>
+        </header>
+      </div>
+    );
   }
 
   return (
@@ -156,6 +135,65 @@ export default function MyDashboard() {
           새로고침하면 방금 한 수정이 사라질 수 있어요.
         </p>
       )}
+
+      {/* ── 프로젝트 관리 ── */}
+      <section id="projects" className="my-section" aria-labelledby="my-projects-title">
+        <div className="section-head">
+          <h2 id="my-projects-title" className="my-h2">
+            프로젝트 관리
+          </h2>
+          <button
+            type="button"
+            className="btn btn-primary btn-plus"
+            onClick={() => setProjectEditor({ slug: null })}
+          >
+            <PlusIcon size={16} /> 프로젝트 추가
+          </button>
+        </div>
+
+        {projects.length === 0 ? (
+          <div className="empty">
+            <p className="empty-title">아직 프로젝트가 없어요</p>
+            <p className="muted">+ 버튼으로 첫 프로젝트를 추가해 보세요.</p>
+            <button type="button" className="btn btn-primary" onClick={() => setProjectEditor({ slug: null })}>
+              <PlusIcon size={16} /> 프로젝트 추가
+            </button>
+          </div>
+        ) : (
+          <ul className="manage-list">
+            {projects.map((p) => (
+              <li key={p.slug} className="manage-row">
+                <Link href={`/projects/${p.slug}`} className="manage-thumb" aria-label={`${p.title} 보기`}>
+                  {p.images[0] ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={p.images[0].src} alt="" />
+                  ) : (
+                    <span aria-hidden="true">{p.title.trim().charAt(0)}</span>
+                  )}
+                </Link>
+                <div className="manage-main">
+                  <Link href={`/projects/${p.slug}`} className="manage-title">
+                    {p.title}
+                  </Link>
+                  <p className="manage-sub muted">{[p.period, p.type].filter(Boolean).join(" · ")}</p>
+                </div>
+                <div className="manage-actions">
+                  <button type="button" className="btn btn-sm" onClick={() => setProjectEditor({ slug: p.slug })}>
+                    <EditIcon size={14} /> 수정
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-danger"
+                    onClick={() => askDeleteProject(p.slug, p.title)}
+                  >
+                    <TrashIcon size={14} /> DEL
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       {/* ── 프로필 카드 ── */}
       <section className="profile-card" aria-labelledby="my-profile-title">
@@ -255,90 +293,6 @@ export default function MyDashboard() {
           <dd>{profile.photo ? "등록됨" : "없음"}</dd>
         </div>
       </dl>
-
-      {/* ── 프로젝트 관리 ── */}
-      <section id="projects" className="my-section" aria-labelledby="my-projects-title">
-        <div className="section-head">
-          <h2 id="my-projects-title" className="my-h2">
-            프로젝트 관리
-          </h2>
-          <button
-            type="button"
-            className="btn btn-primary btn-plus"
-            onClick={() => setProjectEditor({ slug: null })}
-          >
-            <PlusIcon size={16} /> 프로젝트 추가
-          </button>
-        </div>
-
-        {projects.length === 0 ? (
-          <div className="empty">
-            <p className="empty-title">아직 프로젝트가 없어요</p>
-            <p className="muted">+ 버튼으로 첫 프로젝트를 추가해 보세요.</p>
-            <button type="button" className="btn btn-primary" onClick={() => setProjectEditor({ slug: null })}>
-              <PlusIcon size={16} /> 프로젝트 추가
-            </button>
-          </div>
-        ) : (
-          <ul className="manage-list">
-            {projects.map((p) => (
-              <li key={p.slug} className="manage-row">
-                <Link href={`/projects/${p.slug}`} className="manage-thumb" aria-label={`${p.title} 보기`}>
-                  {p.images[0] ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={p.images[0].src} alt="" />
-                  ) : (
-                    <span aria-hidden="true">{p.title.trim().charAt(0)}</span>
-                  )}
-                </Link>
-                <div className="manage-main">
-                  <Link href={`/projects/${p.slug}`} className="manage-title">
-                    {p.title}
-                  </Link>
-                  <p className="manage-sub muted">{[p.period, p.type].filter(Boolean).join(" · ")}</p>
-                </div>
-                <div className="manage-actions">
-                  <button type="button" className="btn btn-sm" onClick={() => setProjectEditor({ slug: p.slug })}>
-                    <EditIcon size={14} /> 수정
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-sm btn-danger"
-                    onClick={() => askDeleteProject(p.slug, p.title)}
-                  >
-                    <TrashIcon size={14} /> DEL
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      {/* ── 데이터 관리 ── */}
-      <section className="my-section" aria-labelledby="my-data-title">
-        <div className="section-head">
-          <h2 id="my-data-title" className="my-h2">
-            데이터 관리
-          </h2>
-        </div>
-        <p className="muted data-note">
-          수정한 내용은 이 브라우저에 저장돼요. 다른 기기나 배포 사이트에서도 쓰려면 내보내기 파일을 만들어 두고
-          가져오기로 불러오세요.
-        </p>
-        <div className="data-actions">
-          <button type="button" className="btn" onClick={onExport}>
-            내보내기 (JSON)
-          </button>
-          <button type="button" className="btn" onClick={() => importInput.current?.click()}>
-            가져오기
-          </button>
-          <input ref={importInput} type="file" accept="application/json,.json" hidden onChange={onImport} />
-          <button type="button" className="btn btn-danger" onClick={askReset}>
-            기본값으로 초기화
-          </button>
-        </div>
-      </section>
 
       {profileOpen && <ProfileEditor onClose={() => setProfileOpen(false)} />}
       {projectEditor && (

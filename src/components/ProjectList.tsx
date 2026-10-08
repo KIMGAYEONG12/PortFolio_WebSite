@@ -8,7 +8,7 @@ import { usePortfolio } from "./PortfolioProvider";
 import ProjectEditor from "./ProjectEditor";
 
 export default function ProjectList() {
-  const { projects, deleteProject, toast } = usePortfolio();
+  const { projects, deleteProject, toast, canEdit } = usePortfolio();
   const [editor, setEditor] = useState<{ slug: string | null } | null>(null);
   const [deleting, setDeleting] = useState<{ slug: string; title: string } | null>(null);
 
@@ -19,21 +19,24 @@ export default function ProjectList() {
           프로젝트
         </h2>
         <div>
-          <div className="list-head">
-            <button type="button" className="btn btn-primary btn-plus" onClick={() => setEditor({ slug: null })}>
-              <PlusIcon size={16} /> 프로젝트 추가
-            </button>
-          </div>
+          {canEdit && (
+            <div className="list-head">
+              <button type="button" className="btn btn-primary btn-plus" onClick={() => setEditor({ slug: null })}>
+                <PlusIcon size={16} /> 프로젝트 추가
+              </button>
+            </div>
+          )}
 
           {projects.length === 0 ? (
             <div className="empty">
               <p className="empty-title">아직 등록된 프로젝트가 없어요</p>
-              <p className="muted">위의 + 프로젝트 추가 버튼으로 첫 프로젝트를 등록해 보세요.</p>
+              <p className="muted">곧 프로젝트를 채워 넣을게요.</p>
             </div>
           ) : (
             <ul className="project-list">
               {projects.map((p) => (
                 <li key={p.slug}>
+                  {canEdit && (
                   <div className="project-tools">
                     <button type="button" className="btn btn-sm" onClick={() => setEditor({ slug: p.slug })}>
                       <EditIcon size={14} /> 수정
@@ -46,6 +49,7 @@ export default function ProjectList() {
                       <TrashIcon size={14} /> DEL
                     </button>
                   </div>
+                  )}
                   <Link href={`/projects/${p.slug}`} className="project-row">
                     <div className="project-meta">
                       <span>{p.period}</span>

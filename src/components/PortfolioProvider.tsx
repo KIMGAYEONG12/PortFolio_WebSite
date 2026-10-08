@@ -21,6 +21,7 @@ import {
 } from "@/lib/normalize";
 
 const STORAGE_KEY = "portfolio:v1";
+const LOCAL_HOSTS = ["localhost", "127.0.0.1", "[::1]"];
 
 type NewProject = Omit<Project, "slug">;
 
@@ -29,6 +30,8 @@ type PortfolioContextValue = {
   projects: Project[];
   /** localStorage 불러오기가 끝났는지 */
   ready: boolean;
+  /** 편집 가능 여부 — 내 컴퓨터(localhost)에서만 true, 배포 사이트에서는 항상 false */
+  canEdit: boolean;
   /** 브라우저 저장 공간이 부족해 저장에 실패했는지 */
   saveError: boolean;
   updateProfile: (patch: Partial<Profile>) => void;
@@ -53,12 +56,20 @@ export default function PortfolioProvider({ children }: { children: ReactNode })
   const [profile, setProfile] = useState<Profile>(defaultProfile);
   const [projects, setProjects] = useState<Project[]>(defaultProjects);
   const [ready, setReady] = useState(false);
+  const [canEdit, setCanEdit] = useState(false);
   const [saveError, setSaveError] = useState(false);
   const [toastMsg, setToastMsg] = useState<{ id: number; text: string } | null>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 1) 처음 한 번: 브라우저에 저장된 데이터 불러오기
   useEffect(() => {
+    // 배포 사이트(Vercel)에서는 편집을 막고, 코드에 적힌 기본값만 보여줍니다.
+    const local = LOCAL_HOSTS.includes(window.location.hostname);
+    setCanEdit(local);
+    if (!local) {
+      setReady(true);
+      return;
+    }
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
@@ -81,14 +92,14 @@ export default function PortfolioProvider({ children }: { children: ReactNode })
 
   // 2) 바뀔 때마다 저장
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || !canEdit) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ v: DATA_VERSION, profile, projects }));
       setSaveError(false);
     } catch {
       setSaveError(true);
     }
-  }, [profile, projects, ready]);
+  }, [profile, projects, ready, canEdit]);
 
   const toast = useCallback((text: string) => {
     if (toastTimer.current) clearTimeout(toastTimer.current);
@@ -152,6 +163,7 @@ export default function PortfolioProvider({ children }: { children: ReactNode })
       profile,
       projects,
       ready,
+      canEdit,
       saveError,
       updateProfile,
       addProject,
@@ -166,6 +178,7 @@ export default function PortfolioProvider({ children }: { children: ReactNode })
       profile,
       projects,
       ready,
+      canEdit,
       saveError,
       updateProfile,
       addProject,

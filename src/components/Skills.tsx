@@ -11,14 +11,28 @@ export default function Skills() {
         <h2 id="skills-title" className="section-title">
           기술
         </h2>
-        <dl className="meta-list">
+        <div className="skill-grid">
           {profile.skills.map((s, i) => (
-            <div key={`${i}-${s.group}`} className="meta-row">
-              <dt>{s.group}</dt>
-              <dd>{s.items.join(", ")}</dd>
-            </div>
+            <article
+              key={`${i}-${s.group}`}
+              className={`skill-card ${s.group === "학습 중" ? "is-learning" : ""}`.trim()}
+            >
+              <header className="skill-card-head">
+                <span className="skill-index" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="skill-group">{s.group}</h3>
+              </header>
+              <ul className="skill-chips">
+                {s.items.map((item) => (
+                  <li key={item} className="skill-chip">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
           ))}
-        </dl>
+        </div>
       </div>
     </section>
   );

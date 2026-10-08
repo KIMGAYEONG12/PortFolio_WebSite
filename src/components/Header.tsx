@@ -6,7 +6,7 @@ import Avatar from "./Avatar";
 import { usePortfolio } from "./PortfolioProvider";
 
 export default function Header() {
-  const { profile, ready } = usePortfolio();
+  const { profile, ready, canEdit } = usePortfolio();
   const pathname = usePathname();
   const onMy = pathname === "/my";
 
@@ -27,6 +27,7 @@ export default function Header() {
                 </Link>
               </li>
             ))}
+            {canEdit && (
             <li>
               <Link
                 href="/my"
@@ -39,6 +40,7 @@ export default function Header() {
                 <span className="nav-my-label">MY</span>
               </Link>
             </li>
+            )}
           </ul>
         </nav>
       </div>

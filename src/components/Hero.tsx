@@ -5,7 +5,7 @@ import Avatar from "./Avatar";
 import { usePortfolio } from "./PortfolioProvider";
 
 export default function Hero() {
-  const { profile, ready } = usePortfolio();
+  const { profile, ready, canEdit } = usePortfolio();
   const longName = profile.name.length > 5;
 
   return (
@@ -43,7 +43,7 @@ export default function Hero() {
           <span className="fade-swap" data-pending={!ready || undefined}>
             <Avatar photo={profile.photo} name={profile.name} size="clamp(120px, 20vw, 240px)" />
           </span>
-          {ready && !profile.photo && (
+          {ready && canEdit && !profile.photo && (
             <Link href="/my" className="hero-photo-hint">
               <span aria-hidden="true">+</span> 프로필 사진 추가
             </Link>

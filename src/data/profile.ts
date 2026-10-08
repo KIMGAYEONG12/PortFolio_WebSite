@@ -27,16 +27,15 @@ export type Profile = {
 };
 
 export const defaultProfile: Profile = {
-  // 임시 이름 — MY 화면의 "이름 수정" 버튼으로 바꿀 수 있어요.
-  name: "홍길동",
-  nameEn: "Gildong Hong",
+  name: "김가영",
+  nameEn: "Gayeong Kim",
   role: "Front-end & Web App Developer",
   roleEn: "Front-end & Web App Developer",
   tagline: "처음 쓰는 사람도 막히지 않는 화면을 만듭니다.",
   intro:
     "Next.js와 TypeScript로 화면을 만들고, 팀 프로젝트에서 API 연동과 반응형 UI를 맡아 왔습니다.",
   description:
-    "홍길동의 프론트 및 웹 앱 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.",
+    "김가영의 프론트 및 웹 앱 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.",
 
   // TODO: 이메일은 본인 주소로 교체 (GitHub 주소는 설정 완료)
   email: "kboy14@naver.com",
@@ -45,14 +44,15 @@ export const defaultProfile: Profile = {
   photo: "/profile.jpg",
 
   about: [
-    "Next.js와 TypeScript로 사용자가 마주하는 화면을 만들고, PHP·MySQL·SQLite 기반의 서버 코드까지 이해하며 프런트와 백엔드 사이를 매끄럽게 잇습니다.",
-    "Figma 디자인을 HTML/CSS로 옮기는 일부터 팀 프로젝트의 API 연동까지 경험했습니다. 화려함보다 처음 쓰는 사람도 막히지 않는 사용성을 더 중요하게 생각합니다.",
+    "정보통신공학을 전공하고, Next.js·TypeScript로 사용자가 마주하는 화면을 만듭니다. PHP·MySQL 기반의 서버 코드와 Firebase까지 다루며 프런트와 백엔드 사이를 매끄럽게 잇습니다.",
+    "졸업 작품으로 아두이노와 MATLAB을 활용한 수경 재배 시스템을 팀으로 만들어 데이터를 확인하고 오류를 고치며 시연·발표했습니다. 이후 웹·앱 개발 과정에서 팀 프로젝트의 API 연동과 반응형 UI를 맡았고, 지금은 Flutter로 개인 프로젝트를 만들고 있습니다.",
+    "화려함보다 처음 쓰는 사람도 막히지 않는 사용성을 더 중요하게 생각합니다.",
   ],
 
   facts: [
     {
-      label: "관심 분야",
-      value: "지도·좌석 현황처럼 상태가 자주 바뀌는 화면, 반응형 UI, 웹 접근성",
+      label: "학력",
+      value: "대구대학교 정보통신공학전공 졸업 (2021.03 ~ 2025.02) · 학점 4.1 / 4.5",
     },
     {
       label: "협업 방식",
@@ -73,9 +73,10 @@ export const defaultProfile: Profile = {
         "Next.js",
         "Zustand",
         "Flutter",
+        "Dart",
       ],
     },
-    { group: "백엔드 · DB", items: ["PHP", "Laravel", "MySQL", "SQLite"] },
+    { group: "백엔드 · DB", items: ["PHP", "Laravel", "MySQL", "SQLite", "Firebase"] },
     {
       group: "디자인 · 협업",
       items: ["Figma", "Git / GitHub", "Postman", "Vercel"],
@@ -84,8 +85,8 @@ export const defaultProfile: Profile = {
   ],
 
   navigation: [
-    { label: "소개", href: "/#about" },
     { label: "프로젝트", href: "/#projects" },
+    { label: "소개", href: "/#about" },
     { label: "기술", href: "/#skills" },
     { label: "연락", href: "/#contact" },
   ],
