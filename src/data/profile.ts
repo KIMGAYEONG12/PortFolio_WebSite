@@ -33,7 +33,7 @@ export const defaultProfile: Profile = {
   roleEn: "Front-end & Web App Developer",
   tagline: "처음 쓰는 사람도 막히지 않는 화면을 만듭니다.",
   intro:
-    "Next.js와 TypeScript로 화면을 만들고, 팀 프로젝트에서 API 연동과 반응형 UI를 맡아 왔습니다.",
+    "Next.js와 TypeScript로 화면을 만들고, 팀 프로젝트에서 API 연동과 반응형 UI를 맡았습니다. 지금은 Flutter와 Firebase로 개인 프로젝트 시세 농부를 만들고 있습니다.",
   description:
     "김가영의 프론트 및 웹 앱 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.",
 
