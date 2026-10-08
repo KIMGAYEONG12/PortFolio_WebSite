@@ -105,7 +105,9 @@ export default function MyDashboard() {
     });
   }
 
-  if (ready && !canEdit) {
+  if (!ready) return <div className="container my" aria-busy="true" />;
+
+  if (!canEdit) {
     return (
       <div className="container my is-ready">
         <header className="my-head">
