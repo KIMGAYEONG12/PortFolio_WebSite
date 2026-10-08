@@ -1720,10 +1720,15 @@ button.contact-mail {
   gap: 8px;
 }
 .skill-logo {
-  width: 18px;
-  height: 18px;
+  height: 20px;
+  width: auto;
+  max-width: 60px;
   flex: none;
   object-fit: contain;
+}
+.skill-logo-tall {
+  height: 34px;
+  max-width: 34px;
 }
 .skill-logo-fallback {
   width: 18px;
