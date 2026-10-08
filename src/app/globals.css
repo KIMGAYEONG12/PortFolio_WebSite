@@ -1707,3 +1707,32 @@ button.contact-mail {
     flex: 1;
   }
 }
+
+/* 소개 본문 글씨 크기 */
+#about .prose.lead {
+  font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+}
+
+/* 기술 로고 */
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.skill-logo {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  object-fit: contain;
+}
+.skill-logo-fallback {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--muted);
+}
+.skill-chip:hover {
+  background: var(--surface);
+  border-color: #c9c9d1;
+  color: var(--ink);
+}

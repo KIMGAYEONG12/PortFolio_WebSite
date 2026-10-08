@@ -73,15 +73,14 @@ export const defaultProfile: Profile = {
         "Next.js",
         "Zustand",
         "Flutter",
-        "Dart",
       ],
     },
-    { group: "백엔드 · DB", items: ["PHP", "Laravel", "MySQL", "SQLite", "Firebase"] },
+    { group: "백엔드 · DB", items: ["PHP", "Laravel", "MySQL", "SQLite"] },
     {
       group: "디자인 · 협업",
       items: ["Figma", "Git / GitHub", "Postman", "Vercel"],
     },
-    { group: "학습 중", items: ["React Native", "Java"] },
+    { group: "학습 중", items: ["React Native", "Java", "Flutter", "Firebase", "CLI"] },
   ],
 
   navigation: [
