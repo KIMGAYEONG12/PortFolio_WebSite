@@ -50,7 +50,7 @@ function Logo({ name }: { name: string }) {
   }
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img className="skill-logo" src={`${LOGO_BASE}/${file}.svg`} alt="" loading="lazy" width={18} height={18} />
+    <img className="skill-logo" src={`${LOGO_BASE}/${file}.svg`} alt="" width={18} height={18} />
   );
 }
 
