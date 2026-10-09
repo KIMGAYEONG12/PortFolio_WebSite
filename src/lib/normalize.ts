@@ -108,13 +108,38 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 5;
+export const DATA_VERSION = 6;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
 const OLD_ROLE_EN = "Frontend Developer";
 const OLD_DESC =
   "홍길동의 프론트엔드 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.";
+
+// v5 기본값 (v6으로 올라올 때, 사용자가 직접 바꾸지 않은 경우에만 새 기본값으로 교체)
+const OLD_TAGLINE_V5 = "처음 쓰는 사람도 막히지 않는 화면을 만듭니다.";
+const OLD_INTRO_V5 =
+  "Next.js와 TypeScript로 화면을 만들고, 팀 프로젝트에서 API 연동과 반응형 UI를 맡았습니다. 지금은 Flutter와 Firebase로 개인 프로젝트 시세 농부를 만들고 있으며, 완성하면 게임으로 출시할 계획이 있습니다.";
+const OLD_SKILLS_V5 = JSON.stringify([
+  {
+    group: "프론트엔드",
+    items: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Zustand",
+      "Flutter",
+      "React Native",
+      "CLI",
+    ],
+  },
+  { group: "백엔드 · DB", items: ["PHP", "Laravel", "Java", "MYSQL", "SQLite", "Supabase"] },
+  { group: "디자인 · 협업", items: ["Figma", "Git / GitHub", "Postman", "Vercel"] },
+  { group: "학습 중", items: ["Flutter", "Firebase"] },
+]);
 
 // v4 기본값 (v5로 올라올 때, 사용자가 직접 바꾸지 않은 경우에만 새 기본값으로 교체)
 const OLD_INTRO_V4 =
@@ -151,6 +176,13 @@ export function migrateProfile(p: Profile): Profile {
   // v4 → v5: 소개 문구에 출시 계획 추가, 기술 분류 정리 (직접 바꾼 값은 유지)
   if (next.intro === OLD_INTRO_V4) next.intro = defaultProfile.intro;
   if (JSON.stringify(next.skills) === OLD_SKILLS_V4) {
+    next.skills = defaultProfile.skills.map((g) => ({ ...g, items: [...g.items] }));
+  }
+
+  // v5 → v6: 한 줄 소개 제거, 소개 문구 단축, 기술 추가 (직접 바꾼 값은 유지)
+  if (next.tagline === OLD_TAGLINE_V5) next.tagline = defaultProfile.tagline;
+  if (next.intro === OLD_INTRO_V5) next.intro = defaultProfile.intro;
+  if (JSON.stringify(next.skills) === OLD_SKILLS_V5) {
     next.skills = defaultProfile.skills.map((g) => ({ ...g, items: [...g.items] }));
   }
 

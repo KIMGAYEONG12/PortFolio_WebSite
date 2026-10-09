@@ -41,6 +41,8 @@ const LOGOS: Record<string, Logo> = {
   vercel: { src: `${DEVICON}vercel/vercel-original.svg` },
   java: { src: `${DEVICON}java/java-original.svg` },
   supabase: { src: `${DEVICON}supabase/supabase-original.svg` },
+  "tailwind css": { src: `${DEVICON}tailwindcss/tailwindcss-original.svg` },
+  phpmyadmin: wiki("PhpMyAdmin_logo.svg"),
 };
 
 function Fallback() {

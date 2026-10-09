@@ -258,7 +258,7 @@ export default function MyDashboard() {
             {profile.role}
             {profile.roleEn && <span className="muted"> · {profile.roleEn}</span>}
           </p>
-          <p className="profile-tagline muted">{profile.tagline}</p>
+          {profile.tagline && <p className="profile-tagline muted">{profile.tagline}</p>}
 
           <ul className="profile-links">
             {profile.email && <li>{profile.email}</li>}

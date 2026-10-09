@@ -25,7 +25,7 @@ export default function Hero() {
               {profile.name}
             </span>
           </h1>
-          <p className="hero-tagline reveal reveal-3">{profile.tagline}</p>
+          {profile.tagline && <p className="hero-tagline reveal reveal-3">{profile.tagline}</p>}
           <p className="hero-intro reveal reveal-3">{profile.intro}</p>
           <div className="hero-actions reveal reveal-4">
             <Link href="/#projects" className="button">

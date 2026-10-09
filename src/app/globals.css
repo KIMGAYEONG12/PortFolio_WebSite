@@ -162,6 +162,10 @@ a {
   line-height: 1.4;
   max-width: 24em;
 }
+/* 한 줄 소개(tagline)를 비웠을 때는 이름 바로 아래에 간격을 둡니다. */
+.hero-name + .hero-intro {
+  margin-top: clamp(24px, 4vw, 48px);
+}
 .hero-intro {
   margin-top: 16px;
   max-width: 34em;
