@@ -108,7 +108,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 11;
+export const DATA_VERSION = 12;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
@@ -260,6 +260,9 @@ export function migrateProfile(p: Profile): Profile {
   if (JSON.stringify(next.skills) === OLD_SKILLS_V5) {
     next.skills = defaultProfile.skills.map((g) => ({ ...g, items: [...g.items] }));
   }
+
+  // v11 → v12: 기본 프로필 사진(고양이)을 없앰. 직접 올린 사진(data URL)은 유지
+  if (next.photo === "/profile.jpg") next.photo = defaultProfile.photo;
 
   // v10 → v11: 소개에 시세 농부 이름 추가, 학습 중에 Android·Android Studio 추가 (직접 바꾼 값은 유지)
   if (next.about[1] === OLD_ABOUT1_V10) {

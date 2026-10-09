@@ -37,11 +37,12 @@ Node.js 18.17 이상이 필요합니다.
 
 | 사진 | 파일 | 방법 |
 | --- | --- | --- |
-| 프로필 사진 | `public/profile.jpg` | 새 사진을 **같은 이름(`profile.jpg`)으로 덮어쓰기** |
+| 프로필 사진 | `public/profile.jpg` | 사진을 `profile.jpg`로 넣고 `src/data/profile.ts`의 `photo`를 `"/profile.jpg"`로 바꾸기 |
 | 프로젝트 스크린샷 | `public/projects/` | 이미지를 넣고 `src/data/projects.ts`의 `images`에 경로 추가 |
 
+- 지금은 프로필 사진 없이 이름 첫 글자 아바타(`photo: ""`)가 나옵니다. 사진을 넣은 뒤에는 같은 이름 파일을 덮어쓰기만 하면 바뀝니다.
 - 프로필 사진은 정사각형에 가까운 사진이 가장 예쁘게 보입니다. (용량은 1MB 이하 권장)
-- `png` 등 다른 형식을 쓰려면 파일을 `public/profile.png`로 넣고 `src/data/profile.ts`의 `photo` 값을 `"/profile.png"`로 바꾸세요.
+- `png` 등 다른 형식을 쓰려면 파일을 `public/profile.png`로 넣고 `photo` 값을 `"/profile.png"`로 바꾸세요.
 - 바꾼 뒤 `git add .` → `git commit -m "프로필 사진 변경"` → `git push` 하면 배포 사이트에 반영됩니다.
 - 내 컴퓨터(localhost)의 MY 화면에서 사진을 올려 둔 적이 있으면, 그 사진이 먼저 보일 수 있습니다. 이때는 MY 화면에서 `기본값으로 초기화`를 누르세요.
 
