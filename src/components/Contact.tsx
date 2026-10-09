@@ -22,11 +22,16 @@ export default function Contact() {
             </button>
           )}
           {profile.github && (
-            <p>
-              <a className="text-link" href={profile.github} target="_blank" rel="noopener noreferrer">
-                GitHub
+            <div>
+              <a
+                className="contact-mail contact-github"
+                href={profile.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {profile.github.replace(/^https?:\/\//, "").replace(/\/$/, "")}
               </a>
-            </p>
+            </div>
           )}
         </div>
       </div>
