@@ -238,7 +238,7 @@ a {
 
 /* ── Sections ─────────────────────────── */
 .section {
-  padding-block: clamp(72px, 11vw, 144px);
+  padding-block: clamp(56px, 8.5vw, 112px);
   border-top: 1px solid var(--line);
 }
 .section-grid {

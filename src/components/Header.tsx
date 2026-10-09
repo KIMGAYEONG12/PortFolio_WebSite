@@ -15,7 +15,7 @@ export default function Header() {
       <div className="container header-inner">
         <Link href="/" className="wordmark">
           <span className="fade-swap" data-pending={!ready || undefined}>
-            {profile.name}
+            {profile.name}의 포트폴리오
           </span>
         </Link>
         <nav aria-label="주요 메뉴">
