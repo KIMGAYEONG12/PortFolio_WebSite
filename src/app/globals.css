@@ -632,7 +632,7 @@ a {
   place-items: center;
   border-radius: 50%;
   overflow: hidden;
-  background: linear-gradient(135deg, #23315a 0%, #5b6fa8 100%);
+  background: linear-gradient(135deg, #d9dce2 0%, #b9bec8 100%);
   color: #fff;
   font-weight: 600;
   font-size: calc(var(--size, 40px) * 0.42);
@@ -642,7 +642,7 @@ a {
 .avatar-silhouette {
   width: 58%;
   height: 58%;
-  opacity: 0.92;
+  opacity: 1;
 }
 .avatar img {
   width: 100%;
