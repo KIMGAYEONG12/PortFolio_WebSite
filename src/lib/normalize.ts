@@ -108,13 +108,45 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 10;
+export const DATA_VERSION = 11;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
 const OLD_ROLE_EN = "Frontend Developer";
 const OLD_DESC =
   "홍길동의 프론트엔드 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.";
+
+// v10 기본값 (v11로 올라올 때, 사용자가 직접 바꾸지 않은 경우에만 새 기본값으로 교체)
+const OLD_ABOUT1_V10 =
+  "졸업 작품으로 아두이노와 MATLAB을 활용한 수경 재배 시스템을 팀으로 만들어 데이터를 확인하고 오류를 고치며 시연·발표했습니다. 이후 웹·앱 개발 과정에서 팀 프로젝트의 API 연동과 반응형 UI를 맡았고, 지금은 Flutter로 개인 프로젝트를 만들고 있습니다.";
+const OLD_SKILLS_V10 = JSON.stringify([
+  {
+    group: "프론트엔드",
+    items: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Zustand",
+      "Flutter",
+      "React Native",
+      "Android",
+      "CLI",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    group: "백엔드 · DB",
+    items: ["PHP", "Laravel", "Java", "MYSQL", "phpMyAdmin", "Supabase"],
+  },
+  {
+    group: "디자인 · 협업",
+    items: ["Figma", "Git / GitHub", "Postman", "Vercel", "Jupyter", "Android Studio"],
+  },
+  { group: "학습 중", items: ["Flutter", "Firebase", "AI Agent"] },
+]);
 
 // v9 기본값 (v10으로 올라올 때, 사용자가 직접 바꾸지 않은 경우에만 새 기본값으로 교체)
 const OLD_ROLE_V9 = "Front-end & Web App Developer";
@@ -226,6 +258,14 @@ export function migrateProfile(p: Profile): Profile {
   if (next.tagline === OLD_TAGLINE_V5) next.tagline = defaultProfile.tagline;
   if (next.intro === OLD_INTRO_V5) next.intro = defaultProfile.intro;
   if (JSON.stringify(next.skills) === OLD_SKILLS_V5) {
+    next.skills = defaultProfile.skills.map((g) => ({ ...g, items: [...g.items] }));
+  }
+
+  // v10 → v11: 소개에 시세 농부 이름 추가, 학습 중에 Android·Android Studio 추가 (직접 바꾼 값은 유지)
+  if (next.about[1] === OLD_ABOUT1_V10) {
+    next.about = next.about.map((t, i) => (i === 1 ? defaultProfile.about[1] : t));
+  }
+  if (JSON.stringify(next.skills) === OLD_SKILLS_V10) {
     next.skills = defaultProfile.skills.map((g) => ({ ...g, items: [...g.items] }));
   }
 
