@@ -108,13 +108,18 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 9;
+export const DATA_VERSION = 10;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
 const OLD_ROLE_EN = "Frontend Developer";
 const OLD_DESC =
   "홍길동의 프론트엔드 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.";
+
+// v9 기본값 (v10으로 올라올 때, 사용자가 직접 바꾸지 않은 경우에만 새 기본값으로 교체)
+const OLD_ROLE_V9 = "Front-end & Web App Developer";
+const OLD_INTRO_V9 =
+  "개발자로 지원합니다. Next.js와 TypeScript로 화면을 만들고, 지금은 Flutter와 Firebase로 공영도매시장 실시간 시세를 반영한 농장 게임 시세 농부를 혼자 개발하고 있습니다. 완성한 뒤 출시할 계획이 있습니다.";
 
 // v8 기본값 (v9로 올라올 때, 사용자가 직접 바꾸지 않은 경우에만 새 기본값으로 교체)
 const OLD_INTRO_V8 =
@@ -223,6 +228,11 @@ export function migrateProfile(p: Profile): Profile {
   if (JSON.stringify(next.skills) === OLD_SKILLS_V5) {
     next.skills = defaultProfile.skills.map((g) => ({ ...g, items: [...g.items] }));
   }
+
+  // v9 → v10: 직무 표기를 "개발자 · Developer"로, 소개 문구에서 "개발자로 지원합니다." 제거 (직접 바꾼 값은 유지)
+  if (next.role === OLD_ROLE_V9) next.role = defaultProfile.role;
+  if (next.roleEn === OLD_ROLE_V9) next.roleEn = defaultProfile.roleEn;
+  if (next.intro === OLD_INTRO_V9) next.intro = defaultProfile.intro;
 
   // v8 → v9: 시세 농부 소개 문구 (직접 바꾼 값은 유지)
   if (next.intro === OLD_INTRO_V8) next.intro = defaultProfile.intro;

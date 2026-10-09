@@ -15,6 +15,7 @@ export default function Hero() {
           <p className="hero-role reveal reveal-1">
             <span className="fade-swap" data-pending={!ready || undefined}>
               {profile.role}
+              {profile.roleEn ? ` · ${profile.roleEn}` : ""}
             </span>
           </p>
           <h1
