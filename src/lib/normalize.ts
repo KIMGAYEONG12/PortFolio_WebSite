@@ -108,13 +108,43 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 6;
+export const DATA_VERSION = 7;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
 const OLD_ROLE_EN = "Frontend Developer";
 const OLD_DESC =
   "홍길동의 프론트엔드 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.";
+
+// v6 기본값 (v7로 올라올 때, 사용자가 직접 바꾸지 않은 경우에만 새 기본값으로 교체)
+const OLD_INTRO_V6 =
+  "Next.js와 TypeScript로 화면을 만들고, Flutter와 Firebase로 시세 농부를 만들고 있습니다. 완성하면 출시할 계획이 있습니다.";
+const OLD_ABOUT0_V6 =
+  "정보통신공학을 전공하고, Next.js·TypeScript로 사용자가 마주하는 화면을 만듭니다. PHP·MySQL 기반의 서버 코드와 Firebase까지 다루며 프런트와 백엔드 사이를 매끄럽게 잇습니다.";
+const OLD_SKILLS_V6 = JSON.stringify([
+  {
+    group: "프론트엔드",
+    items: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Zustand",
+      "Flutter",
+      "React Native",
+      "CLI",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    group: "백엔드 · DB",
+    items: ["PHP", "Laravel", "Java", "MYSQL", "phpMyAdmin", "SQLite", "Supabase"],
+  },
+  { group: "디자인 · 협업", items: ["Figma", "Git / GitHub", "Postman", "Vercel"] },
+  { group: "학습 중", items: ["Flutter", "Firebase", "AI Agent"] },
+]);
 
 // v5 기본값 (v6으로 올라올 때, 사용자가 직접 바꾸지 않은 경우에만 새 기본값으로 교체)
 const OLD_TAGLINE_V5 = "처음 쓰는 사람도 막히지 않는 화면을 만듭니다.";
@@ -183,6 +213,15 @@ export function migrateProfile(p: Profile): Profile {
   if (next.tagline === OLD_TAGLINE_V5) next.tagline = defaultProfile.tagline;
   if (next.intro === OLD_INTRO_V5) next.intro = defaultProfile.intro;
   if (JSON.stringify(next.skills) === OLD_SKILLS_V5) {
+    next.skills = defaultProfile.skills.map((g) => ({ ...g, items: [...g.items] }));
+  }
+
+  // v6 → v7: 지원자 소개 문구, "구현합니다" 표현, 기술 정리 (직접 바꾼 값은 유지)
+  if (next.intro === OLD_INTRO_V6) next.intro = defaultProfile.intro;
+  if (next.about[0] === OLD_ABOUT0_V6) {
+    next.about = [defaultProfile.about[0], ...next.about.slice(1)];
+  }
+  if (JSON.stringify(next.skills) === OLD_SKILLS_V6) {
     next.skills = defaultProfile.skills.map((g) => ({ ...g, items: [...g.items] }));
   }
 

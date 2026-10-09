@@ -138,17 +138,17 @@ a {
 .hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(64px, 12vw, 160px) clamp(72px, 12vw, 152px);
+  padding-block: clamp(48px, 8vw, 104px) clamp(56px, 8vw, 104px);
 }
 .hero-role {
   font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
   font-weight: 600;
   letter-spacing: 0.01em;
   color: var(--accent);
-  margin-bottom: clamp(10px, 1.6vw, 18px);
+  margin-bottom: clamp(6px, 1vw, 10px);
 }
 .hero-name {
-  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 5vw, 3.75rem);
   font-weight: 200;
   line-height: 1;
   letter-spacing: -0.05em;
@@ -164,7 +164,7 @@ a {
 }
 /* 한 줄 소개(tagline)를 비웠을 때는 이름 바로 아래에 간격을 둡니다. */
 .hero-name + .hero-intro {
-  margin-top: clamp(24px, 4vw, 48px);
+  margin-top: clamp(12px, 2vw, 20px);
 }
 .hero-intro {
   margin-top: 16px;
@@ -172,7 +172,7 @@ a {
   color: var(--muted);
 }
 .hero-actions {
-  margin-top: clamp(32px, 4vw, 48px);
+  margin-top: clamp(20px, 2.6vw, 28px);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -686,7 +686,7 @@ a {
   gap: 32px clamp(32px, 6vw, 96px);
 }
 .hero-name-long {
-  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
   letter-spacing: -0.04em;
 }
 .hero-photo {

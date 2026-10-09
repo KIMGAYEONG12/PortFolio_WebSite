@@ -43,6 +43,9 @@ const LOGOS: Record<string, Logo> = {
   supabase: { src: `${DEVICON}supabase/supabase-original.svg` },
   "tailwind css": { src: `${DEVICON}tailwindcss/tailwindcss-original.svg` },
   phpmyadmin: wiki("PhpMyAdmin_logo.svg"),
+  jupyter: { src: `${DEVICON}jupyter/jupyter-original.svg` },
+  android: { src: `${DEVICON}android/android-original.svg` },
+  "android studio": { src: `${DEVICON}androidstudio/androidstudio-original.svg` },
 };
 
 function Fallback() {
