@@ -45,7 +45,8 @@ const LOGOS: Record<string, Logo> = {
   phpmyadmin: wiki("PhpMyAdmin_logo.svg"),
   jupyter: { src: `${DEVICON}jupyter/jupyter-original.svg` },
   android: { src: `${DEVICON}android/android-original.svg` },
-  "android studio": { src: `${DEVICON}androidstudio/androidstudio-original.svg` },
+  // 구글이 만든 Android Studio 공식 아이콘 (위키미디어 커먼즈, CC BY 2.5, 제작: Google)
+  "android studio": wiki("Android_Studio_icon_(2023).svg"),
 };
 
 function Fallback() {

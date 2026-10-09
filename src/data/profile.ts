@@ -34,7 +34,7 @@ export const defaultProfile: Profile = {
   // 비워 두면 화면에서 자동으로 숨겨집니다.
   tagline: "",
   intro:
-    "Next.js와 TypeScript로 화면을 만들고, 지금은 Flutter와 Firebase로 공영도매시장 실시간 시세를 반영한 농장 게임 시세 농부를 혼자 개발하고 있습니다. 완성한 뒤 출시할 계획이 있습니다.",
+    "Next.js와 TypeScript로 화면을 만들고, 개인 프로젝트로 Flutter와 Firebase를 사용해 공영도매시장 실시간 시세를 반영한 농장 게임 시세 농부를 개발하고 있습니다. 완성한 뒤 출시할 계획이 있습니다.",
   description:
     "김가영의 프론트 및 웹 앱 개발 포트폴리오. Next.js, React, TypeScript로 만든 팀 프로젝트와 개인 프로젝트를 소개합니다.",
 
