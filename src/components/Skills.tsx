@@ -3,14 +3,17 @@
 import { useState } from "react";
 import { usePortfolio } from "./PortfolioProvider";
 
-/** 로고는 위키미디어 커먼즈(위키백과 이미지 저장소)에서 불러오고, 글자가 붙은 가로형 로고만 아이콘형(devicon)을 씁니다. */
+/**
+ * 로고는 위키미디어 커먼즈(위키백과 이미지 저장소)와 devicon에서 불러옵니다.
+ * 모두 벡터(SVG) 원본이라 크기를 키워도 선명합니다. (?width= 같은 크기 옵션을 붙이면 흐린 PNG로 내려와요)
+ */
 const WIKI = "https://commons.wikimedia.org/wiki/Special:FilePath/";
 const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/";
 
 type Logo = { src: string; tall?: boolean };
 
 const wiki = (file: string, tall = false): Logo => ({
-  src: `${WIKI}${encodeURI(file)}?width=120`,
+  src: `${WIKI}${encodeURI(file)}`,
   tall,
 });
 
@@ -37,6 +40,7 @@ const LOGOS: Record<string, Logo> = {
   postman: wiki("Postman.svg"),
   vercel: { src: `${DEVICON}vercel/vercel-original.svg` },
   java: { src: `${DEVICON}java/java-original.svg` },
+  supabase: { src: `${DEVICON}supabase/supabase-original.svg` },
 };
 
 function Fallback() {

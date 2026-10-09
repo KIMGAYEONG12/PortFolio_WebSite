@@ -148,7 +148,7 @@ a {
   margin-bottom: clamp(10px, 1.6vw, 18px);
 }
 .hero-name {
-  font-size: clamp(3rem, 9vw, 7rem);
+  font-size: clamp(2.25rem, 6vw, 4.5rem);
   font-weight: 200;
   line-height: 1;
   letter-spacing: -0.05em;
@@ -682,7 +682,7 @@ a {
   gap: 32px clamp(32px, 6vw, 96px);
 }
 .hero-name-long {
-  font-size: clamp(2.25rem, 6vw, 4.5rem);
+  font-size: clamp(1.75rem, 4vw, 3rem);
   letter-spacing: -0.04em;
 }
 .hero-photo {

@@ -30,7 +30,7 @@ export const projects: Project[] = [
     period: "2026.10 ~ 진행 중",
     type: "개인 프로젝트 · 모바일 게임",
     summary:
-      "전국 공영도매시장의 실제 경매 시세로 움직이는 농장 시뮬레이션 게임입니다. 작물을 키워 보관하다가 시세를 보고 가장 좋은 때에 출하합니다.",
+      "전국 공영도매시장의 실제 경매 시세로 움직이는 농장 시뮬레이션 게임입니다. 작물을 키워 보관하다가 시세를 보고 가장 좋은 때에 출하합니다. 완성하면 출시할 계획이 있습니다.",
     role: "기획, 설계, 개발, 배포까지 1인 개발",
     stack: ["Flutter", "Dart", "Firebase", "Firestore", "Riverpod", "GitHub Actions"],
     overview:
