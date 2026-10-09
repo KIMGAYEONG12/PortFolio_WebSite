@@ -4,13 +4,9 @@ import Link from "next/link";
 import Avatar from "./Avatar";
 import { usePortfolio } from "./PortfolioProvider";
 
-/** 소개 문구 안에서 진하게 보여줄 말 (없으면 그냥 일반 글씨로 나옵니다) */
-const EMPHASIS = "개인 프로젝트";
-
 export default function Hero() {
   const { profile, ready, canEdit } = usePortfolio();
   const longName = profile.name.length > 5;
-  const introStart = profile.intro.indexOf(EMPHASIS);
 
   return (
     <section className="hero" aria-labelledby="hero-title">
@@ -31,17 +27,7 @@ export default function Hero() {
             </span>
           </h1>
           {profile.tagline && <p className="hero-tagline reveal reveal-3">{profile.tagline}</p>}
-          <p className="hero-intro reveal reveal-3">
-            {introStart >= 0 ? (
-              <>
-                {profile.intro.slice(0, introStart)}
-                <strong>{EMPHASIS}</strong>
-                {profile.intro.slice(introStart + EMPHASIS.length)}
-              </>
-            ) : (
-              profile.intro
-            )}
-          </p>
+          <p className="hero-intro reveal reveal-3">{profile.intro}</p>
           <div className="hero-actions reveal reveal-4">
             <Link href="/#projects" className="button">
               프로젝트 보기

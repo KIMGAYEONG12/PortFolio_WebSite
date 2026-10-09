@@ -171,10 +171,6 @@ a {
   max-width: 34em;
   color: var(--muted);
 }
-.hero-intro strong {
-  font-weight: 700;
-  color: var(--ink);
-}
 .hero-actions {
   margin-top: clamp(20px, 2.6vw, 28px);
   display: flex;
