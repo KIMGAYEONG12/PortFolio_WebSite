@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function Avatar({ photo, name, size = 40, className = "" }: Props) {
-  const initial = name.trim().charAt(0) || "?";
   const style = { "--size": typeof size === "number" ? `${size}px` : size } as CSSProperties;
 
   return (
@@ -18,7 +17,11 @@ export default function Avatar({ photo, name, size = 40, className = "" }: Props
         // eslint-disable-next-line @next/next/no-img-element
         <img src={photo} alt={`${name} 프로필 사진`} />
       ) : (
-        <span aria-hidden="true">{initial}</span>
+        // 사진이 없으면 글자 없이 기본 사람 모양만 보여줍니다.
+        <svg className="avatar-silhouette" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <circle cx="12" cy="8.5" r="4.2" />
+          <path d="M3.5 21c0-4.7 3.8-7.6 8.5-7.6s8.5 2.9 8.5 7.6z" />
+        </svg>
       )}
     </span>
   );

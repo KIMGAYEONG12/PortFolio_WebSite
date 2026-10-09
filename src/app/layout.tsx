@@ -8,14 +8,14 @@ import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: {
-    default: `${profile.name} | 프론트엔드 개발자`,
+    default: "포트폴리오",
     template: `%s | ${profile.name}`,
   },
   description: profile.description,
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    title: `${profile.name} | 프론트엔드 개발자`,
+    title: `${profile.name} | 포트폴리오`,
     description: profile.description,
   },
 };
