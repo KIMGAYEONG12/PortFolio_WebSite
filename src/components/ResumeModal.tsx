@@ -31,25 +31,31 @@ export default function ResumeModal({ onClose }: Props) {
   const popRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
 
+  const drag = useRef<{ dx: number; dy: number; w: number } | null>(null);
+
   function startDrag(e: React.PointerEvent<HTMLDivElement>) {
     if (pdf !== "yes" || (e.target as HTMLElement).closest("button")) return;
     const el = popRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    const dx = e.clientX - r.left;
-    const dy = e.clientY - r.top;
-    const move = (ev: PointerEvent) => {
-      const x = Math.min(Math.max(0, ev.clientX - dx), window.innerWidth - r.width);
-      const y = Math.min(Math.max(0, ev.clientY - dy), window.innerHeight - 48);
-      setPos({ x, y });
-    };
-    const up = () => {
-      window.removeEventListener("pointermove", move);
-      window.removeEventListener("pointerup", up);
-    };
-    window.addEventListener("pointermove", move);
-    window.addEventListener("pointerup", up);
+    drag.current = { dx: e.clientX - r.left, dy: e.clientY - r.top, w: r.width };
+    // 포인터를 제목 줄에 고정: 창이 PDF(iframe) 위로 지나가도 신호가 끊기지 않는다
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setPos({ x: r.left, y: r.top });
     e.preventDefault();
+  }
+
+  function moveDrag(e: React.PointerEvent<HTMLDivElement>) {
+    const d = drag.current;
+    if (!d) return;
+    const x = Math.min(Math.max(0, e.clientX - d.dx), window.innerWidth - d.w);
+    const y = Math.min(Math.max(0, e.clientY - d.dy), window.innerHeight - 48);
+    setPos({ x, y });
+  }
+
+  function endDrag(e: React.PointerEvent<HTMLDivElement>) {
+    drag.current = null;
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
   }
 
   useEffect(() => {
@@ -74,8 +80,8 @@ export default function ResumeModal({ onClose }: Props) {
       role="dialog"
       aria-label="이력서"
     >
-      <div className={`compose-head${pdf === "yes" ? " resume-drag" : ""}`} onPointerDown={startDrag}>
-        <span className="compose-title">{profile.name} 이력서</span>
+      <div className={`compose-head${pdf === "yes" ? " resume-drag" : ""}`} onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}>
+        <span className="compose-title">{profile.name} 이력서{pdf === "yes" && <span className="resume-drag-hint"> · 제목 줄을 끌면 옮길 수 있어요</span>}</span>
         <button type="button" className="compose-close" onClick={onClose} aria-label="닫기">
           <CloseIcon />
         </button>
