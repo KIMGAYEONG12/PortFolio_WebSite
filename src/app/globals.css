@@ -1864,8 +1864,8 @@ button.contact-mail {
 
 /* 이력서 PDF 뷰어(public/resume.pdf 가 있을 때) */
 .resume-pop.resume-pdf {
-  width: min(680px, calc(100vw - 32px));
-  height: min(88vh, 860px);
+  width: min(440px, calc(100vw - 32px));
+  height: min(54vh, 400px);
 }
 .resume-frame {
   flex: 1;
