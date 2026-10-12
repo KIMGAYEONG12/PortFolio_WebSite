@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { CloseIcon } from "./Icons";
 import { usePortfolio } from "./PortfolioProvider";
-import { openResumePdf } from "@/lib/resume";
+import { openResumePdf, RESUME_URL } from "@/lib/resume";
 
 type Props = { onClose: () => void };
 
@@ -11,6 +11,21 @@ type Props = { onClose: () => void };
 export default function ResumeModal({ onClose }: Props) {
   const { profile, projects } = usePortfolio();
   const [blocked, setBlocked] = useState(false);
+  // 이력서 PDF 파일(public/resume.pdf)이 있는지: 있으면 PDF 뷰어로 보여 주고, 없으면 아래 글 이력서를 보여 준다
+  const [pdf, setPdf] = useState<"checking" | "yes" | "no">("checking");
+
+  useEffect(() => {
+    let alive = true;
+    fetch(RESUME_URL, { method: "HEAD" })
+      .then((r) => {
+        const type = r.headers.get("content-type") ?? "";
+        if (alive) setPdf(r.ok && type.includes("pdf") ? "yes" : "no");
+      })
+      .catch(() => alive && setPdf("no"));
+    return () => {
+      alive = false;
+    };
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -27,7 +42,7 @@ export default function ResumeModal({ onClose }: Props) {
   }
 
   return (
-    <div className="compose resume-pop" role="dialog" aria-label="이력서">
+    <div className={`compose resume-pop${pdf === "yes" ? " resume-pdf" : ""}`} role="dialog" aria-label="이력서">
       <div className="compose-head">
         <span className="compose-title">{profile.name} 이력서</span>
         <button type="button" className="compose-close" onClick={onClose} aria-label="닫기">
@@ -35,6 +50,13 @@ export default function ResumeModal({ onClose }: Props) {
         </button>
       </div>
 
+      {pdf === "yes" ? (
+        <iframe className="resume-frame" src={`${RESUME_URL}#view=FitH`} title={`${profile.name} 이력서 PDF`} />
+      ) : pdf === "checking" ? (
+        <div className="resume-body">
+          <p className="muted">이력서를 불러오는 중…</p>
+        </div>
+      ) : (
       <div className="resume-body">
         <h3 className="resume-name">{profile.name}</h3>
         <p className="resume-role">
@@ -98,17 +120,31 @@ export default function ResumeModal({ onClose }: Props) {
           </section>
         )}
       </div>
+      )}
 
       <div className="compose-foot resume-foot">
+        {pdf === "yes" ? (
+          <>
+            <a className="btn btn-primary" href={RESUME_URL} download={`${profile.name}_이력서.pdf`}>
+              PDF 다운로드
+            </a>
+            <a className="btn" href={RESUME_URL} target="_blank" rel="noopener noreferrer">
+              새 탭에서 열기
+            </a>
+          </>
+        ) : (
         <button type="button" className="btn btn-primary" onClick={download}>
           PDF 다운로드
         </button>
+        )}
         {blocked && (
           <p className="form-error" role="alert">
             팝업이 막혀 있어요. 이 사이트의 팝업을 허용한 뒤 다시 눌러 주세요.
           </p>
         )}
-        <p className="muted resume-hint">인쇄 창에서 대상을 &quot;PDF로 저장&quot;으로 고르면 파일이 만들어져요.</p>
+        {pdf !== "yes" && (
+          <p className="muted resume-hint">인쇄 창에서 대상을 &quot;PDF로 저장&quot;으로 고르면 파일이 만들어져요.</p>
+        )}
       </div>
     </div>
   );

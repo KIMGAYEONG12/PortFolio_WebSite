@@ -1861,3 +1861,15 @@ button.contact-mail {
     gap: 0;
   }
 }
+
+/* 이력서 PDF 뷰어(public/resume.pdf 가 있을 때) */
+.resume-pop.resume-pdf {
+  width: min(680px, calc(100vw - 32px));
+  height: min(88vh, 860px);
+}
+.resume-frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #f4f4f6;
+}
