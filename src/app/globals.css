@@ -1883,3 +1883,10 @@ button.contact-mail {
   border: 0;
   background: #f4f4f6;
 }
+
+/* 제목 줄을 끌어서 옮길 수 있다 */
+.resume-drag {
+  cursor: move;
+  user-select: none;
+  touch-action: none;
+}

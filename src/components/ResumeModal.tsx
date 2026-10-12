@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "./Icons";
 import { usePortfolio } from "./PortfolioProvider";
 import { openResumePdf, RESUME_URL } from "@/lib/resume";
@@ -27,6 +27,31 @@ export default function ResumeModal({ onClose }: Props) {
     };
   }, []);
 
+  // 제목 줄을 끌어서 창을 옮긴다 (PDF 뷰어일 때). pos 가 null 이면 CSS 기본 자리(화면 가운데).
+  const popRef = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+
+  function startDrag(e: React.PointerEvent<HTMLDivElement>) {
+    if (pdf !== "yes" || (e.target as HTMLElement).closest("button")) return;
+    const el = popRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const dx = e.clientX - r.left;
+    const dy = e.clientY - r.top;
+    const move = (ev: PointerEvent) => {
+      const x = Math.min(Math.max(0, ev.clientX - dx), window.innerWidth - r.width);
+      const y = Math.min(Math.max(0, ev.clientY - dy), window.innerHeight - 48);
+      setPos({ x, y });
+    };
+    const up = () => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+    e.preventDefault();
+  }
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -42,8 +67,14 @@ export default function ResumeModal({ onClose }: Props) {
   }
 
   return (
-    <div className={`compose resume-pop${pdf === "yes" ? " resume-pdf" : ""}`} role="dialog" aria-label="이력서">
-      <div className="compose-head">
+    <div
+      ref={popRef}
+      className={`compose resume-pop${pdf === "yes" ? " resume-pdf" : ""}`}
+      style={pdf === "yes" && pos ? { left: pos.x, top: pos.y, right: "auto", bottom: "auto", transform: "none" } : undefined}
+      role="dialog"
+      aria-label="이력서"
+    >
+      <div className={`compose-head${pdf === "yes" ? " resume-drag" : ""}`} onPointerDown={startDrag}>
         <span className="compose-title">{profile.name} 이력서</span>
         <button type="button" className="compose-close" onClick={onClose} aria-label="닫기">
           <CloseIcon />
