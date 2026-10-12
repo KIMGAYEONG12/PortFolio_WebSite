@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
+import ResumeModal from "./ResumeModal";
 import { usePortfolio } from "./PortfolioProvider";
 
 export default function About() {
   const { profile } = usePortfolio();
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
     <section id="about" className="section" aria-labelledby="about-title">
@@ -21,6 +24,9 @@ export default function About() {
               ))}
             </div>
           )}
+          <button type="button" className="btn btn-primary resume-open" onClick={() => setResumeOpen(true)}>
+            이력서 보기
+          </button>
           {profile.facts.length > 0 && (
             <dl className="meta-list">
               {profile.facts.map((f, i) => (
@@ -33,6 +39,7 @@ export default function About() {
           )}
         </div>
       </div>
+      {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
     </section>
   );
 }

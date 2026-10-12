@@ -8,7 +8,7 @@ import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
   title: {
-    default: "포트폴리오",
+    default: `${profile.name} | 포트폴리오`,
     template: `%s | ${profile.name}`,
   },
   description: profile.description,
