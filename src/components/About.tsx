@@ -14,7 +14,7 @@ export default function About() {
         <h2 id="about-title" className="section-title">
           경험 · 활동 · 교육
         </h2>
-        <div>
+        <div className="about-content">
           {profile.about.length > 0 && (
             <div className="prose-group">
               {profile.about.map((text, i) => (
@@ -24,9 +24,6 @@ export default function About() {
               ))}
             </div>
           )}
-          <button type="button" className="btn btn-primary resume-open" onClick={() => setResumeOpen(true)}>
-            이력서 보기
-          </button>
           {profile.facts.length > 0 && (
             <dl className="meta-list">
               {profile.facts.map((f, i) => (
@@ -37,6 +34,11 @@ export default function About() {
               ))}
             </dl>
           )}
+          <div className="resume-actions">
+            <button type="button" className="btn btn-primary" onClick={() => setResumeOpen(true)}>
+              이력서 보기
+            </button>
+          </div>
         </div>
       </div>
       {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
