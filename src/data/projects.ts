@@ -49,6 +49,15 @@ export const siseNongbuShots: ProjectImage[] = [
   { src: "/projects/sise/my.webp", alt: "MY 화면" },
 ];
 
+/** cafeOn 앱 화면 (지도 → 메뉴 관리 → 주문내역 → 사장님 홈 → 좌석 관리 순서) */
+export const cafeonShots: ProjectImage[] = [
+  { src: "/projects/cafeon/map.webp", alt: "카페 지도 화면" },
+  { src: "/projects/cafeon/menu.webp", alt: "메뉴 관리 화면" },
+  { src: "/projects/cafeon/orders.webp", alt: "주문내역 화면" },
+  { src: "/projects/cafeon/home.webp", alt: "사장님 홈 화면" },
+  { src: "/projects/cafeon/seats.webp", alt: "좌석 관리 화면" },
+];
+
 export const thumbnailOf = (p: Pick<Project, "slug" | "thumbnail">): string =>
   p.thumbnail || defaultThumbnails[p.slug] || "";
 
@@ -123,7 +132,7 @@ export const projects: Project[] = [
     ],
     live: "",
     github: "",
-    images: [],
+    images: cafeonShots,
   },
   {
     slug: "path",

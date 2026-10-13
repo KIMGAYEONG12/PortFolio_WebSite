@@ -1,5 +1,5 @@
 import { defaultProfile, type Profile, type Fact, type SkillGroup } from "@/data/profile";
-import { siseNongbuShots, type Project } from "@/data/projects";
+import { cafeonShots, siseNongbuShots, type Project } from "@/data/projects";
 
 type Obj = Record<string, unknown>;
 const asObj = (v: unknown): Obj => (v && typeof v === "object" ? (v as Obj) : {});
@@ -103,6 +103,8 @@ export function migrateProjects(list: Project[]): Project[] {
     p.slug === "movie-site" && !p.live ? { ...p, live: "https://tmdb-movie-app-vjz1.vercel.app/" } : p,
   ).map((p) =>
     p.slug === "sise-nongbu" && p.images.every((i) => i.src.startsWith("/projects/sise/")) ? { ...p, images: siseNongbuShots } : p,
+  ).map((p) =>
+    p.slug === "cafeon" && p.images.every((i) => i.src.startsWith("/projects/cafeon/")) ? { ...p, images: cafeonShots } : p,
   );
 }
 
@@ -123,7 +125,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 18;
+export const DATA_VERSION = 19;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
