@@ -56,29 +56,29 @@ export default function ShotCarousel({ images, label }: { images: Shot[]; label:
 
   return (
     <div className="shot-carousel" role="group" aria-label={label}>
-      <div className="shot-track" ref={track} onScroll={syncEdge}>
-        {images.map((img, i) => (
-          <button
-            key={`${i}-${img.src}`}
-            type="button"
-            className="shot-slide"
-            onClick={() => setOpen(i)}
-            aria-label={`${img.alt} 크게 보기`}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={img.src} alt={img.alt} loading={i < 4 ? "eager" : "lazy"} decoding="async" className="shot-mobile" />
-          </button>
-        ))}
-      </div>
-      <div className="shot-nav">
-        <button type="button" className="shot-arrow" onClick={() => page(-1)} disabled={edge.start} aria-label="이전 화면">
-          <ArrowLeftIcon />
+      <div className="shot-stage">
+        <div className="shot-track" ref={track} onScroll={syncEdge}>
+          {images.map((img, i) => (
+            <button
+              key={`${i}-${img.src}`}
+              type="button"
+              className="shot-slide"
+              onClick={() => setOpen(i)}
+              aria-label={`${img.alt} 크게 보기`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={img.src} alt={img.alt} loading={i < 4 ? "eager" : "lazy"} decoding="async" className="shot-mobile" />
+            </button>
+          ))}
+        </div>
+        <button type="button" className="shot-arrow is-prev" onClick={() => page(-1)} disabled={edge.start} aria-label="이전 화면">
+          <ArrowLeftIcon size={14} />
         </button>
-        <span className="shot-count">{images.length}장 · 눌러서 크게 보기</span>
-        <button type="button" className="shot-arrow" onClick={() => page(1)} disabled={edge.end} aria-label="다음 화면">
-          <ArrowRightIcon />
+        <button type="button" className="shot-arrow is-next" onClick={() => page(1)} disabled={edge.end} aria-label="다음 화면">
+          <ArrowRightIcon size={14} />
         </button>
       </div>
+      <p className="shot-count">{images.length}장 · 눌러서 크게 보기</p>
 
       {open !== null && (
         <div className="lightbox" role="dialog" aria-modal="true" aria-label={images[open].alt} onClick={() => setOpen(null)}>
