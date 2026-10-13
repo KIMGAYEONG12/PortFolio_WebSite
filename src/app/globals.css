@@ -1899,21 +1899,19 @@ button.contact-mail {
 /* ── 프로젝트 목록 썸네일 (날짜·종류 아래 작게) ───────────── */
 .project-thumb {
   display: block;
-  width: 100%;
-  max-width: 148px;
-  aspect-ratio: 4 / 3;
+  width: 112px;
+  aspect-ratio: 342 / 611;
   margin-top: 10px;
   object-fit: cover;
   object-position: top;
   border-radius: 6px;
 }
-/* 이미 알맞게 잘라 둔 그림은 비율 그대로 (세로로 긴 시세 농부는 높이만 제한) */
-.project-thumb[src$="sise-nongbu.png"],
-.project-thumb[src$="path.png"] {
-  width: auto;
-  height: auto;
-  max-height: 200px;
-  aspect-ratio: auto;
+/* 가로로 넓은 PC 화면은 눈에 띄는 가운데 부분이 보이게 */
+.project-thumb[src$="movie-site.png"] {
+  object-position: 48% 50%;
+}
+.project-thumb[src$="joinus.webp"] {
+  object-position: 30% 55%;
 }
 @media (max-width: 860px) {
   .project-thumb {
