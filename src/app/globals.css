@@ -1505,11 +1505,6 @@ a.contact-mail {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .tl-ch { opacity: 1; animation: none; }
-  .tl-caret { display: none; }
-  .hero-tagline em { animation: none; background-size: 100% 100%; }
-}
 .hero-photo .avatar {
   box-shadow: none;
 }
