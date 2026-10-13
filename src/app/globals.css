@@ -1870,8 +1870,8 @@ button.contact-mail {
   right: auto;
   bottom: auto;
   transform: translate(-50%, -50%);
-  width: min(520px, calc(100vw - 32px));
-  height: min(60vh, 460px);
+  width: min(860px, calc(100vw - 32px));
+  height: min(88vh, 740px);
   border: 1px solid var(--line);
   border-radius: 12px;
   overflow: hidden;
