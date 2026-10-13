@@ -58,6 +58,15 @@ export const cafeonShots: ProjectImage[] = [
   { src: "/projects/cafeon/seats.webp", alt: "좌석 관리 화면" },
 ];
 
+/** PATH 앱 화면 (홈 → 지도 → AI 여행 만들기 → 찜 → MY 순서) */
+export const pathShots: ProjectImage[] = [
+  { src: "/projects/path/home.webp", alt: "홈 화면" },
+  { src: "/projects/path/map.webp", alt: "지도 화면" },
+  { src: "/projects/path/ai.webp", alt: "AI 여행 만들기 화면" },
+  { src: "/projects/path/likes.webp", alt: "찜 화면" },
+  { src: "/projects/path/my.webp", alt: "MY 화면" },
+];
+
 export const thumbnailOf = (p: Pick<Project, "slug" | "thumbnail">): string =>
   p.thumbnail || defaultThumbnails[p.slug] || "";
 
@@ -180,7 +189,7 @@ export const projects: Project[] = [
     ],
     live: "",
     github: "",
-    images: [],
+    images: pathShots,
   },
   {
     slug: "movie-site",
