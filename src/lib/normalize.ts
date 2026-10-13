@@ -118,7 +118,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 17;
+export const DATA_VERSION = 18;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
@@ -328,6 +328,9 @@ export function migrateProfile(p: Profile): Profile {
   }
   // v14 → v15: 학점 4.1 → 3.04
   next.facts = next.facts.map((f) => ({ ...f, value: f.value.replace("학점 4.1 / 4.5", "학점 3.04 / 4.5") }));
+
+  // v17 → v18: 프로필 사진이 비어 있으면 기본 사진(/profile.jpg)을 쓴다 (직접 올린 사진은 유지)
+  if (!next.photo) next.photo = defaultProfile.photo;
 
   return next;
 }

@@ -44,7 +44,7 @@ export const defaultProfile: Profile = {
 
   // 비워 두면 이름 첫 글자 아바타가 나옵니다.
   // 사진을 쓰려면 public/profile.jpg 파일을 넣고 "/profile.jpg"로 바꾸세요.
-  photo: "",
+  photo: "/profile.jpg",
 
   about: [
     "정보통신공학을 전공하고, Next.js·TypeScript로 사용자가 마주하는 화면을 만듭니다. PHP·MySQL 기반의 서버 코드와 Firebase까지 다루며 프런트와 백엔드 사이를 매끄럽게 구현합니다.",
