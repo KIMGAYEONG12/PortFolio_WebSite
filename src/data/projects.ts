@@ -77,6 +77,14 @@ export const movieShots: ProjectImage[] = [
   { src: "/projects/movie/movie-6.webp", alt: "애니 영화 화면" },
 ];
 
+/** Joinus 화면 (주간 핫토픽 → 나만의 지도 → 포인트 내역(다크 모드) → 알림 순서) */
+export const joinusShots: ProjectImage[] = [
+  { src: "/projects/joinus/joinus-1.webp", alt: "주간 핫토픽·최신글 화면" },
+  { src: "/projects/joinus/joinus-2.webp", alt: "나만의 지도 화면" },
+  { src: "/projects/joinus/joinus-3.webp", alt: "포인트 내역 화면(다크 모드)" },
+  { src: "/projects/joinus/joinus-4.webp", alt: "내 알림 화면" },
+];
+
 export const thumbnailOf = (p: Pick<Project, "slug" | "thumbnail">): string =>
   p.thumbnail || defaultThumbnails[p.slug] || "";
 
@@ -281,7 +289,7 @@ export const projects: Project[] = [
     ],
     live: "",
     github: "",
-    images: [],
+    images: joinusShots,
   },
 ];
 
