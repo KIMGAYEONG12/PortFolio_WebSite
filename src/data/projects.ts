@@ -67,6 +67,16 @@ export const pathShots: ProjectImage[] = [
   { src: "/projects/path/my.webp", alt: "MY 화면" },
 ];
 
+/** 영화 소개 사이트 화면 (홈 → 전체 영화 → 인기 영화 → 상영중 → 개봉 예정 → 애니 순서) */
+export const movieShots: ProjectImage[] = [
+  { src: "/projects/movie/movie-1.webp", alt: "홈 화면 (이번 주 화제작)" },
+  { src: "/projects/movie/movie-2.webp", alt: "전체 영화 화면" },
+  { src: "/projects/movie/movie-3.webp", alt: "인기 영화 화면" },
+  { src: "/projects/movie/movie-4.webp", alt: "지금 상영 중인 영화 화면" },
+  { src: "/projects/movie/movie-5.webp", alt: "개봉 예정 영화 화면" },
+  { src: "/projects/movie/movie-6.webp", alt: "애니 영화 화면" },
+];
+
 export const thumbnailOf = (p: Pick<Project, "slug" | "thumbnail">): string =>
   p.thumbnail || defaultThumbnails[p.slug] || "";
 
@@ -230,7 +240,7 @@ export const projects: Project[] = [
     ],
     live: "https://tmdb-movie-app-vjz1.vercel.app/",
     github: "",
-    images: [],
+    images: movieShots,
   },
   {
     slug: "joinus",

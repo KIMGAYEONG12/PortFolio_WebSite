@@ -1,5 +1,5 @@
 import { defaultProfile, type Profile, type Fact, type SkillGroup } from "@/data/profile";
-import { cafeonShots, pathShots, siseNongbuShots, type Project } from "@/data/projects";
+import { cafeonShots, movieShots, pathShots, siseNongbuShots, type Project } from "@/data/projects";
 
 type Obj = Record<string, unknown>;
 const asObj = (v: unknown): Obj => (v && typeof v === "object" ? (v as Obj) : {});
@@ -107,6 +107,8 @@ export function migrateProjects(list: Project[]): Project[] {
     p.slug === "cafeon" && p.images.every((i) => i.src.startsWith("/projects/cafeon/")) ? { ...p, images: cafeonShots } : p,
   ).map((p) =>
     p.slug === "path" && p.images.every((i) => i.src.startsWith("/projects/path/")) ? { ...p, images: pathShots } : p,
+  ).map((p) =>
+    p.slug === "movie-site" && p.images.every((i) => i.src.startsWith("/projects/movie/")) ? { ...p, images: movieShots } : p,
   );
 }
 
@@ -127,7 +129,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 20;
+export const DATA_VERSION = 21;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
