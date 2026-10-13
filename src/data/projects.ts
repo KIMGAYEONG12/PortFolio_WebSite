@@ -26,9 +26,9 @@ export type Project = {
 };
 
 export const defaultThumbnails: Record<string, string> = {
-  "sise-nongbu": "/projects/sise-nongbu.jpg",
+  "sise-nongbu": "/projects/sise-nongbu.png",
   cafeon: "/projects/cafeon.png",
-  path: "/projects/path.webp",
+  path: "/projects/path.png",
   "movie-site": "/projects/movie-site.png",
   joinus: "/projects/joinus.webp",
 };

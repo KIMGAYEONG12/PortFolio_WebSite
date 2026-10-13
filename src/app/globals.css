@@ -1905,12 +1905,15 @@ button.contact-mail {
   margin-top: 10px;
   object-fit: cover;
   object-position: top;
-  border: 1px solid var(--line);
   border-radius: 6px;
-  background: var(--surface);
 }
-.project-thumb[src$="sise-nongbu.jpg"] {
-  object-position: 50% 52%;
+/* 이미 알맞게 잘라 둔 그림은 비율 그대로 (세로로 긴 시세 농부는 높이만 제한) */
+.project-thumb[src$="sise-nongbu.png"],
+.project-thumb[src$="path.png"] {
+  width: auto;
+  height: auto;
+  max-height: 200px;
+  aspect-ratio: auto;
 }
 @media (max-width: 860px) {
   .project-thumb {
