@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { CloseIcon } from "./Icons";
+import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from "./Icons";
 
 type Shot = { src: string; alt: string };
 
@@ -72,11 +72,11 @@ export default function ShotCarousel({ images, label }: { images: Shot[]; label:
       </div>
       <div className="shot-nav">
         <button type="button" className="shot-arrow" onClick={() => page(-1)} disabled={edge.start} aria-label="이전 화면">
-          ‹
+          <ArrowLeftIcon />
         </button>
         <span className="shot-count">{images.length}장 · 눌러서 크게 보기</span>
         <button type="button" className="shot-arrow" onClick={() => page(1)} disabled={edge.end} aria-label="다음 화면">
-          ›
+          <ArrowRightIcon />
         </button>
       </div>
 
@@ -94,7 +94,7 @@ export default function ShotCarousel({ images, label }: { images: Shot[]; label:
             }}
             aria-label="이전 화면"
           >
-            ‹
+            <ArrowLeftIcon size={22} />
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="lightbox-img" src={images[open].src} alt={images[open].alt} onClick={(e) => e.stopPropagation()} />
@@ -107,7 +107,7 @@ export default function ShotCarousel({ images, label }: { images: Shot[]; label:
             }}
             aria-label="다음 화면"
           >
-            ›
+            <ArrowRightIcon size={22} />
           </button>
           <p className="lightbox-cap" onClick={(e) => e.stopPropagation()}>
             {open + 1} / {images.length} · {images[open].alt}

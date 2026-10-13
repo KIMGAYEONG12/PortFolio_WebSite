@@ -20,6 +20,22 @@ export function PlusIcon({ size = 18 }: IconProps) {
   );
 }
 
+export function ArrowLeftIcon({ size = 18 }: IconProps) {
+  return (
+    <svg {...base(size)}>
+      <path d="M19 12H5M11 6l-6 6 6 6" />
+    </svg>
+  );
+}
+
+export function ArrowRightIcon({ size = 18 }: IconProps) {
+  return (
+    <svg {...base(size)}>
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
 export function CloseIcon({ size = 18 }: IconProps) {
   return (
     <svg {...base(size)}>
