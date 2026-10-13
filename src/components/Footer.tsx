@@ -8,7 +8,9 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="container footer-inner">
-        <p>2026-09-29 {profile.name}</p>
+        <p>
+          {"<PORTFOLIO />"} · {(profile.nameEn || profile.name).toUpperCase()} · 2026
+        </p>
       </div>
     </footer>
   );
