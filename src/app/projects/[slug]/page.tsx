@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { projects, getProject } from "@/data/projects";
 import ProjectDetail from "@/components/ProjectDetail";
+import { profile } from "@/data/profile";
 
 type Props = { params: { slug: string } };
 
@@ -11,8 +12,10 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: Props): Metadata {
   const project = getProject(params.slug);
-  if (!project) return { title: "프로젝트" };
-  return { title: project.title, description: project.summary };
+  // 탭 제목은 어느 프로젝트를 봐도 "김가영 | 포트폴리오"로 통일합니다.
+  const title = { absolute: `${profile.name} | 포트폴리오` };
+  if (!project) return { title };
+  return { title, description: project.summary };
 }
 
 export default function ProjectPage({ params }: Props) {
