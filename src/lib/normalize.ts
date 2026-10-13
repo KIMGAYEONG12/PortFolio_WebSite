@@ -112,7 +112,8 @@ export function migrateProjects(list: Project[]): Project[] {
   ).map((p) =>
     p.slug === "joinus" && p.images.every((i) => i.src.startsWith("/projects/joinus/")) ? { ...p, images: joinusShots } : p,
   ).map((p) => {
-    if (p.slug === "cafeon" && (p.period === "2026.08 ~ 진행 중" || p.period === "2026.08 ~ 2026.08.31")) return { ...p, period: "2026.08 ~ 2026.08" };
+    if (p.slug === "cafeon" && ["2026.08 ~ 진행 중", "2026.08 ~ 2026.08.31", "2026.08 ~ 2026.08"].includes(p.period)) return { ...p, period: "2026.08 ~ 2026.08.28" };
+    if (p.slug === "path" && p.period === "2026.08 ~ 2026.09") return { ...p, period: "2026.08.31 ~ 2026.09.30" };
     if (p.slug === "movie-site" && p.type === "개인 프로젝트 · 과제") return { ...p, type: "실습 과제" };
     if (p.slug === "joinus" && p.period === "2026" && p.type === "개인 프로젝트") {
       return { ...p, period: "2026.06.11 ~ 2026.07.24", type: "팀 프로젝트" };
@@ -138,7 +139,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 24;
+export const DATA_VERSION = 25;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";

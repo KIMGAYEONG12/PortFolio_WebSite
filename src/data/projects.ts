@@ -116,7 +116,7 @@ export const projects: Project[] = [
   {
     slug: "cafeon",
     title: "cafeOn",
-    period: "2026.08 ~ 2026.08",
+    period: "2026.08 ~ 2026.08.28",
     type: "팀 프로젝트 · 프론트엔드",
     summary:
       "혼잡도를 보고 찾아가는 카페 지도 앱과, 사장님을 위한 매장 운영 화면을 함께 만든 카페 운영·고객 적립 서비스입니다.",
@@ -164,7 +164,7 @@ export const projects: Project[] = [
   {
     slug: "path",
     title: "PATH",
-    period: "2026.08 ~ 2026.09",
+    period: "2026.08.31 ~ 2026.09.30",
     type: "팀 프로젝트 · 4인 · 프론트엔드",
     summary:
       "일본을 자유여행하는 한국인을 위해 한국어 화면으로 도쿄 대중교통 경로와 여행 일정을 안내하는 AI Agent 웹앱입니다.",
