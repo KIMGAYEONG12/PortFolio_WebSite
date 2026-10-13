@@ -1746,21 +1746,20 @@ button.contact-mail {
   gap: 8px;
 }
 .skill-logo {
+  width: 20px;
   height: 20px;
-  width: auto;
-  max-width: 60px;
   flex: none;
   object-fit: contain;
 }
-.skill-logo-tall {
-  height: 34px;
-  max-width: 34px;
-}
 .skill-logo-fallback {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   flex: none;
+  padding: 1px;
   color: var(--muted);
+}
+.skill-chip {
+  min-height: 38px;
 }
 .skill-chip:hover {
   background: var(--surface);
@@ -1927,4 +1926,39 @@ button.contact-mail {
 .resume-resize:hover {
   background-image: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cg transform=%27rotate(180 12 12)%27%3E%3Cpath d=%27M5 3l14 8-6.2 1.8L10 19z%27 fill=%27%231b1b1f%27 stroke=%27white%27 stroke-width=%271.6%27 stroke-linejoin=%27round%27/%3E%3C/g%3E%3C/svg%3E");
   opacity: 1;
+}
+
+/* ── 프로젝트 자세히 보기: 제목 옆 모바일 화면 (작게, 크기 모두 같게) ───────────── */
+.detail-top.has-shots {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
+  gap: 24px clamp(24px, 4vw, 56px);
+  align-items: start;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+.detail-top.has-shots .detail-head {
+  margin-bottom: 0;
+}
+.shot-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+}
+.shot-mobile {
+  flex: none;
+  width: 150px;
+  aspect-ratio: 378 / 819;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  scroll-snap-align: start;
+  background: var(--surface);
+}
+@media (max-width: 900px) {
+  .detail-top.has-shots {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

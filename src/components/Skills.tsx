@@ -9,44 +9,43 @@ import { usePortfolio } from "./PortfolioProvider";
  */
 const WIKI = "https://commons.wikimedia.org/wiki/Special:FilePath/";
 const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/";
+const DEVICON_NEW = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.17.0/icons/";
 
-type Logo = { src: string; tall?: boolean };
+type Logo = { src: string };
 
-const wiki = (file: string, tall = false): Logo => ({
-  src: `${WIKI}${encodeURI(file)}`,
-  tall,
-});
+const dev = (name: string, style = "original"): Logo => ({ src: `${DEVICON}${name}/${name}-${style}.svg` });
 
-/** 기술 이름 → 로고. 목록에 없는 기술은 기본 아이콘으로 표시됩니다. */
+/** 기술 이름 → 로고. 목록에 없는 기술은 기본 아이콘으로 표시됩니다. 같은 모양으로 보이도록 devicon 세트를 쓰고, 칸 크기도 모두 같습니다. */
 const LOGOS: Record<string, Logo> = {
-  html5: wiki("HTML5_logo_and_wordmark.svg", true),
-  css3: wiki("CSS3_logo_and_wordmark.svg", true),
-  javascript: wiki("Unofficial_JavaScript_logo_2.svg"),
-  typescript: { src: `${DEVICON}typescript/typescript-original.svg` },
-  react: wiki("React-icon.svg"),
-  "react native": wiki("React-icon.svg"),
-  "next.js": { src: `${DEVICON}nextjs/nextjs-original.svg` },
-  php: wiki("PHP-logo.svg"),
-  laravel: { src: `${DEVICON}laravel/laravel-original.svg` },
-  mysql: { src: `${DEVICON}mysql/mysql-original.svg` },
-  sqlite: wiki("Sqlite-square-icon.svg"),
-  flutter: { src: `${DEVICON}flutter/flutter-original.svg` },
-  dart: { src: `${DEVICON}dart/dart-original.svg` },
-  firebase: wiki("Firebase_Logo_(No_wordmark)_(2024-).svg"),
-  figma: wiki("Figma-logo.svg"),
-  "git / github": { src: `${DEVICON}git/git-original.svg` },
-  git: { src: `${DEVICON}git/git-original.svg` },
-  github: wiki("GitHub_Invertocat_Logo.svg"),
-  postman: wiki("Postman.svg"),
-  vercel: { src: `${DEVICON}vercel/vercel-original.svg` },
-  java: { src: `${DEVICON}java/java-original.svg` },
-  supabase: { src: `${DEVICON}supabase/supabase-original.svg` },
-  "tailwind css": { src: `${DEVICON}tailwindcss/tailwindcss-original.svg` },
-  phpmyadmin: wiki("PhpMyAdmin_logo.svg"),
-  jupyter: { src: `${DEVICON}jupyter/jupyter-original.svg` },
-  android: { src: `${DEVICON}android/android-original.svg` },
-  // 구글이 만든 Android Studio 공식 아이콘 (위키미디어 커먼즈, CC BY 2.5, 제작: Google)
-  "android studio": wiki("Android_Studio_icon_(2023).svg"),
+  html5: dev("html5"),
+  css3: dev("css3"),
+  javascript: dev("javascript"),
+  typescript: dev("typescript"),
+  react: dev("react"),
+  "react native": dev("react"),
+  "next.js": dev("nextjs"),
+  zustand: { src: `${DEVICON_NEW}zustand/zustand-original.svg` },
+  php: dev("php"),
+  laravel: dev("laravel"),
+  mysql: dev("mysql"),
+  sqlite: dev("sqlite"),
+  flutter: dev("flutter"),
+  dart: dev("dart"),
+  firebase: dev("firebase"),
+  figma: dev("figma"),
+  "git / github": dev("git"),
+  git: dev("git"),
+  github: dev("github"),
+  postman: dev("postman"),
+  vercel: dev("vercel"),
+  java: dev("java"),
+  supabase: dev("supabase"),
+  "tailwind css": dev("tailwindcss"),
+  // devicon에 없어서 위키미디어 로고를 같은 칸에 맞춰 넣습니다
+  phpmyadmin: { src: `${WIKI}${encodeURI("PhpMyAdmin_logo.svg")}` },
+  jupyter: dev("jupyter"),
+  android: dev("android"),
+  "android studio": dev("androidstudio"),
 };
 
 function Fallback() {
@@ -74,7 +73,7 @@ function SkillLogo({ name }: { name: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      className={`skill-logo ${logo.tall ? "skill-logo-tall" : ""}`.trim()}
+      className="skill-logo"
       src={logo.src}
       alt=""
       onError={() => setFailed(true)}

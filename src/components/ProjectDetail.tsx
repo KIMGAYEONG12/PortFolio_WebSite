@@ -44,11 +44,22 @@ export default function ProjectDetail({ slug }: { slug: string }) {
         프로젝트 목록
       </Link>
 
+      <div className={`detail-top${project.images.length > 0 ? " has-shots" : ""}`}>
       <header className="detail-head">
         {project.type && <p className="detail-type">{project.type}</p>}
         <h1 className="detail-title">{project.title}</h1>
         {project.summary && <p className="detail-summary">{project.summary}</p>}
       </header>
+
+      {project.images.length > 0 && (
+        <div className="shot-strip" role="group" aria-label={`${project.title} 앱 화면`}>
+          {project.images.map((img, i) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={`${i}-${img.src.slice(-24)}`} src={img.src} alt={img.alt} loading="lazy" className="shot-mobile" />
+          ))}
+        </div>
+      )}
+      </div>
 
       <dl className="meta-list">
         {project.period && (
@@ -95,15 +106,6 @@ export default function ProjectDetail({ slug }: { slug: string }) {
           </div>
         )}
       </dl>
-
-      {project.images.length > 0 && (
-        <div className="shots">
-          {project.images.map((img, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={`${i}-${img.src.slice(-24)}`} src={img.src} alt={img.alt} loading="lazy" className="shot" />
-          ))}
-        </div>
-      )}
 
       {project.overview && (
         <section className="detail-section">

@@ -33,6 +33,22 @@ export const defaultThumbnails: Record<string, string> = {
   joinus: "/projects/joinus.png",
 };
 
+/** 시세 농부 앱 화면 (튜토리얼 → 농장 → 작물 성장 → 작물 관리·바로가기 → 하우스 → 창고 → 상점 → MY 순서) */
+export const siseNongbuShots: ProjectImage[] = [
+  { src: "/projects/sise/tutorial-1.jpg", alt: "튜토리얼 1: 오늘의 시세 확인" },
+  { src: "/projects/sise/tutorial-2.jpg", alt: "튜토리얼 2" },
+  { src: "/projects/sise/tutorial-3.jpg", alt: "튜토리얼 3" },
+  { src: "/projects/sise/tutorial-4.jpg", alt: "튜토리얼 4" },
+  { src: "/projects/sise/tutorial-5.jpg", alt: "튜토리얼 5" },
+  { src: "/projects/sise/farm.png", alt: "농장 화면" },
+  { src: "/projects/sise/crop-growth.png", alt: "작물 성장 화면" },
+  { src: "/projects/sise/farm-menu.png", alt: "작물 관리와 바로가기" },
+  { src: "/projects/sise/greenhouse.png", alt: "하우스 상세 보기" },
+  { src: "/projects/sise/storage.png", alt: "창고 화면" },
+  { src: "/projects/sise/shop.png", alt: "상점 화면" },
+  { src: "/projects/sise/my.png", alt: "MY 화면" },
+];
+
 export const thumbnailOf = (p: Pick<Project, "slug" | "thumbnail">): string =>
   p.thumbnail || defaultThumbnails[p.slug] || "";
 
@@ -59,7 +75,7 @@ export const projects: Project[] = [
     retrospective: [],
     live: "https://sisenongbu.vercel.app",
     github: "",
-    images: [],
+    images: siseNongbuShots,
   },
   {
     slug: "cafeon",
