@@ -111,7 +111,14 @@ export function migrateProjects(list: Project[]): Project[] {
     p.slug === "movie-site" && p.images.every((i) => i.src.startsWith("/projects/movie/")) ? { ...p, images: movieShots } : p,
   ).map((p) =>
     p.slug === "joinus" && p.images.every((i) => i.src.startsWith("/projects/joinus/")) ? { ...p, images: joinusShots } : p,
-  );
+  ).map((p) => {
+    if (p.slug === "cafeon" && p.period === "2026.08 ~ 진행 중") return { ...p, period: "2026.08 ~ 2026.08.31" };
+    if (p.slug === "movie-site" && p.type === "개인 프로젝트 · 과제") return { ...p, type: "실습 과제" };
+    if (p.slug === "joinus" && p.period === "2026" && p.type === "개인 프로젝트") {
+      return { ...p, period: "2026.06.11 ~ 2026.07.24", type: "팀 프로젝트" };
+    }
+    return p;
+  });
 }
 
 /** 제목으로 URL용 slug를 만듭니다. (한글 제목은 인코딩 문제를 피하려고 임의 ID를 사용) */
@@ -131,7 +138,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 22;
+export const DATA_VERSION = 23;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";

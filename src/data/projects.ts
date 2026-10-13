@@ -116,7 +116,7 @@ export const projects: Project[] = [
   {
     slug: "cafeon",
     title: "cafeOn",
-    period: "2026.08 ~ 진행 중",
+    period: "2026.08 ~ 2026.08.31",
     type: "팀 프로젝트 · 프론트엔드",
     summary:
       "혼잡도를 보고 찾아가는 카페 지도 앱과, 사장님을 위한 매장 운영 화면을 함께 만든 카페 운영·고객 적립 서비스입니다.",
@@ -213,7 +213,7 @@ export const projects: Project[] = [
     slug: "movie-site",
     title: "영화 소개 사이트",
     period: "2026.07.20 ~ 2026.07.22",
-    type: "개인 프로젝트 · 과제",
+    type: "실습 과제",
     summary:
       "TMDB API로 영화 목록, 검색, 상세 정보를 보여주는 Next.js + TypeScript 영화 소개 사이트입니다.",
     role: "기획부터 구현, 배포까지 혼자 진행",
@@ -253,8 +253,8 @@ export const projects: Project[] = [
   {
     slug: "joinus",
     title: "Joinus",
-    period: "2026",
-    type: "개인 프로젝트",
+    period: "2026.06.11 ~ 2026.07.24",
+    type: "팀 프로젝트",
     summary:
       "네이버 블로그를 벤치마킹해 만든 블로그 플랫폼으로, 포인트·뱃지, 잔디 캘린더, 테마 설정 같은 참여 기능을 담았습니다.",
     role: "UI 디자인 개편과 기능 구현 (PHP + MySQL)",
