@@ -139,7 +139,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 26;
+export const DATA_VERSION = 27;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
@@ -355,6 +355,12 @@ export function migrateProfile(p: Profile): Profile {
 
   // v25 → v26: 기술의 "학습 중" 묶음 제거
   next.skills = next.skills.filter((g) => g.group !== "학습 중");
+
+  // v26 → v27: 소개 글 두 문단 삭제, 경험·활동·교육 리스트로 교체 (직접 바꾼 값은 유지)
+  next.about = next.about.filter((t) => t !== "정보통신공학을 전공하고, Next.js·TypeScript로 사용자가 마주하는 화면을 만듭니다. PHP·MySQL 기반의 서버 코드와 Firebase까지 다루며 프런트와 백엔드 사이를 매끄럽게 구현합니다." && t !== "졸업 작품으로 아두이노와 MATLAB을 활용한 수경 재배 시스템을 팀으로 만들어 데이터를 확인하고 오류를 고치며 시연·발표했습니다. 이후 웹·앱 개발 과정에서 팀 프로젝트의 API 연동과 반응형 UI를 맡았고, 지금은 Flutter와 Firebase로 개인 프로젝트 시세 농부를 만들고 있습니다.");
+  if (next.facts.length === 2 && next.facts[0].label === "학력" && next.facts[1].label === "협업 방식") {
+    next.facts = defaultProfile.facts.map((f) => ({ ...f }));
+  }
 
   return next;
 }
