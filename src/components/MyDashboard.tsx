@@ -5,6 +5,7 @@ import { useRef, useState, type ChangeEvent, type KeyboardEvent } from "react";
 import Avatar from "./Avatar";
 import ConfirmDialog from "./ConfirmDialog";
 import { CameraIcon, EditIcon, PlusIcon, TrashIcon } from "./Icons";
+import PhotoAdjust from "./PhotoAdjust";
 import ProfileEditor from "./ProfileEditor";
 import ProjectEditor from "./ProjectEditor";
 import { usePortfolio } from "./PortfolioProvider";
@@ -37,6 +38,7 @@ export default function MyDashboard() {
   const [confirm, setConfirm] = useState<ConfirmState>(null);
 
   const photoInput = useRef<HTMLInputElement>(null);
+  const [photoAdjustOpen, setPhotoAdjustOpen] = useState(false);
 
   const skillCount = profile.skills.reduce((sum, g) => sum + g.items.length, 0);
 
@@ -71,7 +73,7 @@ export default function MyDashboard() {
     e.target.value = "";
     if (!file) return;
     try {
-      const photo = await fileToResizedDataUrl(file, { max: 480, square: true, quality: 0.88 });
+      const photo = await fileToResizedDataUrl(file, { max: 720, quality: 0.9 });
       updateProfile({ photo });
       toast("프로필 사진을 바꿨어요");
     } catch (err) {
@@ -200,7 +202,14 @@ export default function MyDashboard() {
       {/* ── 프로필 카드 ── */}
       <section className="profile-card" aria-labelledby="my-profile-title">
         <div className="avatar-wrap">
-          <Avatar photo={profile.photo} name={profile.name} size="clamp(112px, 24vw, 168px)" />
+          <Avatar
+            photo={profile.photo}
+            name={profile.name}
+            size="clamp(112px, 24vw, 168px)"
+            x={profile.photoX}
+            y={profile.photoY}
+            zoom={profile.photoZoom}
+          />
           <button
             type="button"
             className="avatar-plus"
@@ -273,6 +282,11 @@ export default function MyDashboard() {
               <CameraIcon size={15} /> {profile.photo ? "사진 변경" : "사진 추가"}
             </button>
             {profile.photo && (
+              <button type="button" className="btn" onClick={() => setPhotoAdjustOpen(true)}>
+                사진 위치 조절
+              </button>
+            )}
+            {profile.photo && (
               <button type="button" className="btn btn-danger" onClick={askDeletePhoto}>
                 <TrashIcon size={14} /> DEL
               </button>
@@ -297,6 +311,7 @@ export default function MyDashboard() {
       </dl>
 
       {profileOpen && <ProfileEditor onClose={() => setProfileOpen(false)} />}
+      {photoAdjustOpen && <PhotoAdjust onClose={() => setPhotoAdjustOpen(false)} />}
       {projectEditor && (
         <ProjectEditor slug={projectEditor.slug} onClose={() => setProjectEditor(null)} />
       )}

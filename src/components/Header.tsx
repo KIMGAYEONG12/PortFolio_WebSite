@@ -35,7 +35,7 @@ export default function Header() {
                 aria-current={onMy ? "page" : undefined}
               >
                 <span className="fade-swap" data-pending={!ready || undefined}>
-                  <Avatar photo={profile.photo} name={profile.name} size={28} />
+                  <Avatar photo={profile.photo} name={profile.name} size={28} x={profile.photoX} y={profile.photoY} zoom={profile.photoZoom} />
                 </span>
                 <span className="nav-my-label">MY</span>
               </Link>

@@ -2109,3 +2109,49 @@ button.contact-mail {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ── 프로필 사진 위치 조절 ───────────── */
+.avatar.has-photo {
+  background: #bdbdc0;
+}
+.avatar.has-photo img {
+  will-change: transform;
+}
+.photo-adjust {
+  display: grid;
+  gap: 20px;
+}
+.photo-adjust-preview {
+  display: grid;
+  place-items: center;
+  padding: 8px 0;
+}
+.photo-adjust-controls {
+  display: grid;
+  gap: 14px;
+}
+.photo-adjust-controls input[type="range"] {
+  width: 100%;
+}
+.photo-adjust-note {
+  margin: 0;
+  font-size: 0.8125rem;
+}
+.photo-adjust-deploy {
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+.photo-adjust-deploy p {
+  margin: 0;
+}
+.photo-adjust-code {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--surface);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}

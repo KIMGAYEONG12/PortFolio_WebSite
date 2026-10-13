@@ -42,7 +42,14 @@ export default function Hero() {
 
         <div className="hero-photo reveal reveal-3">
           <span className="fade-swap" data-pending={!ready || undefined}>
-            <Avatar photo={profile.photo} name={profile.name} size="clamp(120px, 20vw, 240px)" />
+            <Avatar
+              photo={profile.photo}
+              name={profile.name}
+              size="clamp(120px, 20vw, 240px)"
+              x={profile.photoX}
+              y={profile.photoY}
+              zoom={profile.photoZoom}
+            />
           </span>
           {ready && canEdit && !profile.photo && (
             <Link href="/my" className="hero-photo-hint">

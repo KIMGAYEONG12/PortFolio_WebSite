@@ -4,6 +4,8 @@ import { siseNongbuShots, type Project } from "@/data/projects";
 type Obj = Record<string, unknown>;
 const asObj = (v: unknown): Obj => (v && typeof v === "object" ? (v as Obj) : {});
 const str = (v: unknown, fallback = ""): string => (typeof v === "string" ? v : fallback);
+const num = (v: unknown, fallback: number, min: number, max: number): number =>
+  typeof v === "number" && Number.isFinite(v) ? Math.min(max, Math.max(min, Math.round(v))) : fallback;
 
 /** 저장된/가져온 프로필 데이터를 안전한 Profile 형태로 맞춥니다. */
 export function normalizeProfile(raw: unknown): Profile {
@@ -45,6 +47,9 @@ export function normalizeProfile(raw: unknown): Profile {
     email: str(r.email, d.email),
     github: str(r.github, d.github),
     photo: str(r.photo, ""),
+    photoX: num(r.photoX, d.photoX, 0, 100),
+    photoY: num(r.photoY, d.photoY, 0, 100),
+    photoZoom: num(r.photoZoom, d.photoZoom, 70, 250),
     about,
     facts,
     skills,

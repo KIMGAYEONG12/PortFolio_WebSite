@@ -20,6 +20,10 @@ export type Profile = {
   github: string;
   /** 프로필 사진 (data URL). 빈 문자열이면 이니셜 아바타가 표시됩니다. */
   photo: string;
+  /** 사진에서 보일 중심 위치(0~100, 가운데가 50)와 크기(%, 100이 기본) */
+  photoX: number;
+  photoY: number;
+  photoZoom: number;
   about: string[];
   facts: Fact[];
   skills: SkillGroup[];
@@ -45,6 +49,10 @@ export const defaultProfile: Profile = {
   // 비워 두면 이름 첫 글자 아바타가 나옵니다.
   // 사진을 쓰려면 public/profile.jpg 파일을 넣고 "/profile.jpg"로 바꾸세요.
   photo: "/profile.jpg",
+  // 사진 위치·크기 조절: 내 컴퓨터의 MY 화면 → "사진 위치 조절"에서 맞춘 뒤 나온 값을 여기에 적으세요.
+  photoX: 50, // 0(왼쪽) ~ 100(오른쪽)
+  photoY: 50, // 0(위) ~ 100(아래)
+  photoZoom: 100, // 70 ~ 250 (%)
 
   about: [
     "정보통신공학을 전공하고, Next.js·TypeScript로 사용자가 마주하는 화면을 만듭니다. PHP·MySQL 기반의 서버 코드와 Firebase까지 다루며 프런트와 백엔드 사이를 매끄럽게 구현합니다.",
