@@ -2114,8 +2114,10 @@ button.contact-mail {
 .avatar.has-photo {
   background: #bdbdc0;
 }
-.avatar.has-photo img {
-  will-change: transform;
+.avatar-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .photo-adjust {
   display: grid;
