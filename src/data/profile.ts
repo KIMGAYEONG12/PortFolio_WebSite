@@ -51,7 +51,7 @@ export const defaultProfile: Profile = {
   photo: "/profile.jpg",
   // 사진 위치·크기 조절: 내 컴퓨터의 MY 화면 → "사진 위치 조절"에서 맞춘 뒤 나온 값을 여기에 적으세요.
   photoX: 50, // 0(왼쪽) ~ 100(오른쪽)
-  photoY: 50, // 0(위) ~ 100(아래)
+  photoY: 100, // 0(위) ~ 100(아래) — 아래로 내릴수록 목·셔츠·정장이 더 보입니다
   photoZoom: 100, // 70 ~ 250 (%)
 
   about: [
