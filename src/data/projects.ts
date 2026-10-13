@@ -116,7 +116,7 @@ export const projects: Project[] = [
   {
     slug: "cafeon",
     title: "cafeOn",
-    period: "2026.08 ~ 2026.08.31",
+    period: "2026.08 ~ 2026.08",
     type: "팀 프로젝트 · 프론트엔드",
     summary:
       "혼잡도를 보고 찾아가는 카페 지도 앱과, 사장님을 위한 매장 운영 화면을 함께 만든 카페 운영·고객 적립 서비스입니다.",
