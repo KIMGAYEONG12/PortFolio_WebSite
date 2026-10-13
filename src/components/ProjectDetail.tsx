@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePortfolio } from "./PortfolioProvider";
+import ShotCarousel from "./ShotCarousel";
 
 export default function ProjectDetail({ slug }: { slug: string }) {
   const { projects, ready } = usePortfolio();
@@ -51,14 +52,7 @@ export default function ProjectDetail({ slug }: { slug: string }) {
         {project.summary && <p className="detail-summary">{project.summary}</p>}
       </header>
 
-      {project.images.length > 0 && (
-        <div className="shot-strip" role="group" aria-label={`${project.title} 앱 화면`}>
-          {project.images.map((img, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img key={`${i}-${img.src.slice(-24)}`} src={img.src} alt={img.alt} loading="lazy" className="shot-mobile" />
-          ))}
-        </div>
-      )}
+      {project.images.length > 0 && <ShotCarousel images={project.images} label={`${project.title} 앱 화면`} />}
       </div>
 
       <dl className="meta-list">

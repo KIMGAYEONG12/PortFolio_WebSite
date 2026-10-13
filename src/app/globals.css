@@ -1939,23 +1939,159 @@ button.contact-mail {
 .detail-top.has-shots .detail-head {
   margin-bottom: 0;
 }
-.shot-strip {
+.shot-carousel {
+  min-width: 0;
+}
+.shot-track {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   overflow-x: auto;
-  padding-bottom: 10px;
-  scroll-snap-type: x proximity;
-  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px;
+}
+.shot-track::-webkit-scrollbar {
+  display: none;
+}
+.shot-slide {
+  flex: none;
+  width: 172px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  scroll-snap-align: start;
 }
 .shot-mobile {
-  flex: none;
-  width: 150px;
-  aspect-ratio: 378 / 819;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1080 / 2340;
   object-fit: cover;
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid var(--line);
-  scroll-snap-align: start;
   background: var(--surface);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.shot-slide:hover .shot-mobile {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(27, 27, 31, 0.14);
+}
+.shot-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+.shot-count {
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.shot-arrow {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    opacity 0.2s;
+}
+.shot-arrow:hover:not(:disabled) {
+  background: var(--surface);
+  border-color: #c9c9d1;
+}
+.shot-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+/* 크게 보기 */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 72px 56px;
+  background: rgba(14, 14, 18, 0.86);
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 1080 / 2340;
+  height: min(100%, 880px);
+  width: auto;
+  object-fit: contain;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  cursor: pointer;
+}
+.lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  margin-top: -24px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-arrow:hover,
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+.lightbox-arrow.is-prev {
+  left: 16px;
+}
+.lightbox-arrow.is-next {
+  right: 16px;
+}
+.lightbox-cap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  margin: 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+@media (max-width: 600px) {
+  .lightbox {
+    padding: 20px 12px 52px;
+  }
+  .lightbox-arrow {
+    width: 40px;
+    height: 40px;
+  }
 }
 @media (max-width: 900px) {
   .detail-top.has-shots {
