@@ -55,6 +55,35 @@ export default function ResumeModal({ onClose }: Props) {
 
   const drag = useRef<{ dx: number; dy: number; w: number } | null>(null);
 
+  // 오른쪽 아래 모서리를 끌어서 창 크기를 늘리고 줄인다 (보는 사람 각자의 화면에서만 바뀐다)
+  const [size, setSize] = useState<{ w: number; h: number } | null>(null);
+  const resize = useRef<{ x: number; y: number; w: number; h: number; left: number; top: number } | null>(null);
+
+  function startResize(e: React.PointerEvent<HTMLDivElement>) {
+    const el = popRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    resize.current = { x: e.clientX, y: e.clientY, w: r.width, h: r.height, left: r.left, top: r.top };
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setPos({ x: r.left, y: r.top }); // 왼쪽 위 모서리는 그대로 두고 오른쪽 아래만 움직이게
+    setSize({ w: r.width, h: r.height });
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  function moveResize(e: React.PointerEvent<HTMLDivElement>) {
+    const d = resize.current;
+    if (!d) return;
+    const w = Math.min(Math.max(420, d.w + e.clientX - d.x), window.innerWidth - d.left - 8);
+    const h = Math.min(Math.max(320, d.h + e.clientY - d.y), window.innerHeight - d.top - 8);
+    setSize({ w, h });
+  }
+
+  function endResize(e: React.PointerEvent<HTMLDivElement>) {
+    resize.current = null;
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
+  }
+
   function startDrag(e: React.PointerEvent<HTMLDivElement>) {
     if (pdf !== "yes" || (e.target as HTMLElement).closest("button")) return;
     const el = popRef.current;
@@ -98,7 +127,11 @@ export default function ResumeModal({ onClose }: Props) {
     <div
       ref={popRef}
       className={`compose resume-pop${pdf === "yes" ? " resume-pdf" : ""}`}
-      style={pdf === "yes" && pos ? { left: pos.x, top: pos.y, right: "auto", bottom: "auto", transform: "none" } : undefined}
+      style={
+        pdf === "yes" && pos
+          ? { left: pos.x, top: pos.y, right: "auto", bottom: "auto", transform: "none", ...(size ? { width: size.w, height: size.h } : {}) }
+          : undefined
+      }
       role="dialog"
       aria-label="이력서"
     >
@@ -205,6 +238,18 @@ export default function ResumeModal({ onClose }: Props) {
           <p className="muted resume-hint">인쇄 창에서 대상을 &quot;PDF로 저장&quot;으로 고르면 파일이 만들어져요.</p>
         )}
       </div>
+      {pdf === "yes" && (
+        <div
+          className="resume-resize"
+          role="separator"
+          aria-label="끌어서 창 크기 바꾸기"
+          title="끌어서 크기 바꾸기"
+          onPointerDown={startResize}
+          onPointerMove={moveResize}
+          onPointerUp={endResize}
+          onPointerCancel={endResize}
+        />
+      )}
     </div>
   );
 }

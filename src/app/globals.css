@@ -1870,7 +1870,7 @@ button.contact-mail {
   right: auto;
   bottom: auto;
   transform: translate(-50%, -50%);
-  width: min(960px, calc(100vw - 32px));
+  width: min(1080px, calc(100vw - 32px));
   height: min(92vh, 820px);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -1910,4 +1910,20 @@ button.contact-mail {
   .project-thumb {
     display: none;
   }
+}
+
+/* 창 오른쪽 아래 모서리: 끌어서 크기 바꾸기 */
+.resume-resize {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 26px;
+  height: 26px;
+  cursor: nwse-resize;
+  touch-action: none;
+  background: linear-gradient(135deg, transparent 0 55%, #b8b8c2 55% 63%, transparent 63% 73%, #b8b8c2 73% 81%, transparent 81%);
+  border-bottom-right-radius: 12px;
+}
+.resume-resize:hover {
+  background: linear-gradient(135deg, transparent 0 55%, #666670 55% 63%, transparent 63% 73%, #666670 73% 81%, transparent 81%);
 }
