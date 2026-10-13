@@ -213,7 +213,7 @@ export const projects: Project[] = [
     slug: "movie-site",
     title: "영화 소개 사이트",
     period: "2026.07.20 ~ 2026.07.22",
-    type: "실습 과제",
+    type: "",
     summary:
       "TMDB API로 영화 목록, 검색, 상세 정보를 보여주는 Next.js + TypeScript 영화 소개 사이트입니다.",
     role: "기획부터 구현, 배포까지 혼자 진행",

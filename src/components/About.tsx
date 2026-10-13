@@ -12,7 +12,7 @@ export default function About() {
     <section id="about" className="section" aria-labelledby="about-title">
       <div className="container section-grid">
         <h2 id="about-title" className="section-title">
-          소개
+          경험 · 활동 · 교육
         </h2>
         <div>
           {profile.about.length > 0 && (

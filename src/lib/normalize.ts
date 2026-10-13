@@ -114,7 +114,7 @@ export function migrateProjects(list: Project[]): Project[] {
   ).map((p) => {
     if (p.slug === "cafeon" && ["2026.08 ~ 진행 중", "2026.08 ~ 2026.08.31", "2026.08 ~ 2026.08"].includes(p.period)) return { ...p, period: "2026.08 ~ 2026.08.28" };
     if (p.slug === "path" && p.period === "2026.08 ~ 2026.09") return { ...p, period: "2026.08.31 ~ 2026.09.30" };
-    if (p.slug === "movie-site" && p.type === "개인 프로젝트 · 과제") return { ...p, type: "실습 과제" };
+    if (p.slug === "movie-site" && (p.type === "개인 프로젝트 · 과제" || p.type === "실습 과제")) return { ...p, type: "" };
     if (p.slug === "joinus" && p.period === "2026" && p.type === "개인 프로젝트") {
       return { ...p, period: "2026.06.11 ~ 2026.07.24", type: "팀 프로젝트" };
     }
@@ -139,7 +139,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 25;
+export const DATA_VERSION = 26;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
@@ -352,6 +352,9 @@ export function migrateProfile(p: Profile): Profile {
 
   // v17 → v18: 프로필 사진이 비어 있으면 기본 사진(/profile.jpg)을 쓴다 (직접 올린 사진은 유지)
   if (!next.photo) next.photo = defaultProfile.photo;
+
+  // v25 → v26: 기술의 "학습 중" 묶음 제거
+  next.skills = next.skills.filter((g) => g.group !== "학습 중");
 
   return next;
 }

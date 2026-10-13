@@ -27,7 +27,6 @@ export default function Hero() {
             </span>
           </h1>
           {profile.tagline && <p className="hero-tagline reveal reveal-3">{profile.tagline}</p>}
-          <p className="hero-intro reveal reveal-3">{profile.intro}</p>
           <div className="hero-actions reveal reveal-4">
             <Link href="/#projects" className="button">
               프로젝트 보기

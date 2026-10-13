@@ -98,10 +98,6 @@ export const defaultProfile: Profile = {
       group: "디자인 · 협업",
       items: ["Figma", "Git / GitHub", "Postman", "Vercel", "Jupyter", "Android Studio"],
     },
-    {
-      group: "학습 중",
-      items: ["Flutter", "Firebase", "AI Agent", "Android", "Android Studio"],
-    },
   ],
 
   navigation: [

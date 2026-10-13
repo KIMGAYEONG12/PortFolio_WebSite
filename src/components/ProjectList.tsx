@@ -54,7 +54,7 @@ export default function ProjectList() {
                   <Link href={`/projects/${p.slug}`} className="project-row">
                     <div className="project-meta">
                       <span>{p.period}</span>
-                      <span>{p.type}</span>
+                      {p.type && <span>{p.type}</span>}
                       {thumbnailOf(p) && (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img className="project-thumb" src={thumbnailOf(p)} alt={`${p.title} 화면`} loading="lazy" />

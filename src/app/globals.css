@@ -1770,7 +1770,8 @@ button.contact-mail {
 
 /* ── 이력서 보기 창 (메일 작성 창과 같은 오른쪽 아래 팝업) ───────────── */
 .resume-open {
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-bottom: 32px;
 }
 .resume-pop {
   width: min(560px, calc(100vw - 32px));

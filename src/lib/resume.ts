@@ -6,7 +6,7 @@ import type { Project } from "@/data/projects";
  * 브라우저가 옛 파일을 기억하면 RESUME_VERSION 숫자만 1씩 올려 주세요.
  */
 export const RESUME_FILE = "/resume.pdf";
-export const RESUME_VERSION = 1;
+export const RESUME_VERSION = 2;
 export const RESUME_URL = `${RESUME_FILE}?v=${RESUME_VERSION}`;
 
 /** HTML 글자로 안전하게 바꾼다 (프로필·프로젝트 글에 < > & 가 있어도 깨지지 않게) */
