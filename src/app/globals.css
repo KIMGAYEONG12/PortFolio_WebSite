@@ -1906,13 +1906,6 @@ button.contact-mail {
   object-position: top;
   border-radius: 6px;
 }
-/* 가로로 넓은 PC 화면은 눈에 띄는 가운데 부분이 보이게 */
-.project-thumb[src$="movie-site.png"] {
-  object-position: 48% 50%;
-}
-.project-thumb[src$="joinus.webp"] {
-  object-position: 30% 55%;
-}
 @media (max-width: 860px) {
   .project-thumb {
     display: none;

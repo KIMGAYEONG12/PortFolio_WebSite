@@ -30,7 +30,7 @@ export const defaultThumbnails: Record<string, string> = {
   cafeon: "/projects/cafeon.png",
   path: "/projects/path.webp",
   "movie-site": "/projects/movie-site.png",
-  joinus: "/projects/joinus.webp",
+  joinus: "/projects/joinus.png",
 };
 
 export const thumbnailOf = (p: Pick<Project, "slug" | "thumbnail">): string =>
