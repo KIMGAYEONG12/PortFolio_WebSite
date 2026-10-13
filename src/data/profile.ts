@@ -36,7 +36,7 @@ export const defaultProfile: Profile = {
   role: "개발자",
   roleEn: "Developer",
   // 비워 두면 화면에서 자동으로 숨겨집니다.
-  tagline: "화면부터 서버까지, 끝까지 만들어 내는 개발자",
+  tagline: "화면부터 서버까지, **끝까지** 만들어 내는 개발자",
   intro:
     "개인 프로젝트로 Flutter와 Firebase를 사용해 공영도매시장 실시간 시세를 반영한 농장 게임 시세 농부를 개발하고 있습니다. 완성한 뒤 출시할 계획이 있습니다. Next.js와 TypeScript로 화면을 만들어 왔습니다.",
   description:
