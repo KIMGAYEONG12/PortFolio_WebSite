@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import ConfirmDialog from "./ConfirmDialog";
 import { EditIcon, PlusIcon, TrashIcon } from "./Icons";
+import { thumbnailOf } from "@/data/projects";
 import { usePortfolio } from "./PortfolioProvider";
 import ProjectEditor from "./ProjectEditor";
 
@@ -54,6 +55,10 @@ export default function ProjectList() {
                     <div className="project-meta">
                       <span>{p.period}</span>
                       <span>{p.type}</span>
+                      {thumbnailOf(p) && (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img className="project-thumb" src={thumbnailOf(p)} alt={`${p.title} 화면`} loading="lazy" />
+                      )}
                     </div>
                     <div className="project-main">
                       <h3 className="project-title">{p.title}</h3>

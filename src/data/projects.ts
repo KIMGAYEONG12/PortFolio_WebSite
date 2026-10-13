@@ -21,7 +21,20 @@ export type Project = {
   live: string;
   github: string;
   images: ProjectImage[];
+  /** 프로젝트 목록에 보이는 작은 썸네일 (비우면 아래 defaultThumbnails 값을 씁니다) */
+  thumbnail?: string;
 };
+
+export const defaultThumbnails: Record<string, string> = {
+  "sise-nongbu": "/projects/sise-nongbu.jpg",
+  cafeon: "/projects/cafeon.png",
+  path: "/projects/path.webp",
+  "movie-site": "/projects/movie-site.png",
+  joinus: "/projects/joinus.webp",
+};
+
+export const thumbnailOf = (p: Pick<Project, "slug" | "thumbnail">): string =>
+  p.thumbnail || defaultThumbnails[p.slug] || "";
 
 export const projects: Project[] = [
   {
@@ -181,7 +194,7 @@ export const projects: Project[] = [
       "짧은 과제 기간이라 핵심 화면 위주로 구현했습니다.",
       "로딩·오류 상태 처리와 무한 스크롤을 추가하는 것이 개선 계획입니다.",
     ],
-    live: "",
+    live: "https://tmdb-movie-app-vjz1.vercel.app/",
     github: "",
     images: [],
   },

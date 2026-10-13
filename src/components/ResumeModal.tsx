@@ -3,13 +3,35 @@
 import { useEffect, useRef, useState } from "react";
 import { CloseIcon } from "./Icons";
 import { usePortfolio } from "./PortfolioProvider";
-import { openResumePdf, RESUME_URL } from "@/lib/resume";
+import { openResumePdf, RESUME_FILE, RESUME_VERSION } from "@/lib/resume";
 
 type Props = { onClose: () => void };
 
 /** 메일 작성 창처럼 화면 오른쪽 아래에 뜨는 이력서 보기 창. PDF로 저장할 수 있다. */
 export default function ResumeModal({ onClose }: Props) {
-  const { profile, projects } = usePortfolio();
+  const { profile, projects, canEdit, toast } = usePortfolio();
+  // 새 PDF를 올리면 이 값이 바뀌어 미리보기가 바로 새 파일로 바뀐다
+  const [ver, setVer] = useState<number>(RESUME_VERSION);
+  const RESUME_URL = `${RESUME_FILE}?v=${ver}`;
+  const fileInput = useRef<HTMLInputElement>(null);
+
+  async function replacePdf(file: File | undefined) {
+    if (!file) return;
+    const body = new FormData();
+    body.append("file", file);
+    try {
+      const res = await fetch("/api/resume", { method: "POST", body });
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
+      if (!res.ok) throw new Error(data.error ?? "올리지 못했어요.");
+      setVer(Date.now());
+      setPdf("yes");
+      toast("이력서를 바꿨어요. 배포하려면 public/resume.pdf를 깃허브에 올려 주세요.");
+    } catch (e) {
+      toast(e instanceof Error ? e.message : "올리지 못했어요.");
+    } finally {
+      if (fileInput.current) fileInput.current.value = "";
+    }
+  }
   const [blocked, setBlocked] = useState(false);
   // 이력서 PDF 파일(public/resume.pdf)이 있는지: 있으면 PDF 뷰어로 보여 주고, 없으면 아래 글 이력서를 보여 준다
   const [pdf, setPdf] = useState<"checking" | "yes" | "no">("checking");

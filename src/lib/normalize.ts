@@ -83,12 +83,20 @@ export function normalizeProject(raw: unknown): Project | null {
     retrospective: lines(r.retrospective),
     live: str(r.live),
     github: str(r.github),
+    thumbnail: str(r.thumbnail) || undefined,
     images: Array.isArray(r.images)
       ? r.images
           .map((i) => ({ src: str(asObj(i).src), alt: str(asObj(i).alt) }))
           .filter((i) => i.src)
       : [],
   };
+}
+
+/** 브라우저에 저장된 옛 프로젝트에 새로 생긴 기본값을 채운다 (직접 적은 값은 유지) */
+export function migrateProjects(list: Project[]): Project[] {
+  return list.map((p) =>
+    p.slug === "movie-site" && !p.live ? { ...p, live: "https://tmdb-movie-app-vjz1.vercel.app/" } : p,
+  );
 }
 
 /** 제목으로 URL용 slug를 만듭니다. (한글 제목은 인코딩 문제를 피하려고 임의 ID를 사용) */
@@ -108,7 +116,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 14;
+export const DATA_VERSION = 15;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
@@ -316,5 +324,8 @@ export function migrateProfile(p: Profile): Profile {
     else skills.push({ group: "프론트엔드", items: ["Flutter"] });
     next.skills = skills;
   }
+  // v14 → v15: 학점 4.1 → 3.04
+  next.facts = next.facts.map((f) => ({ ...f, value: f.value.replace("학점 4.1 / 4.5", "학점 3.04 / 4.5") }));
+
   return next;
 }

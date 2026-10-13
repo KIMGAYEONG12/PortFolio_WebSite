@@ -16,6 +16,7 @@ import {
   DATA_VERSION,
   makeSlug,
   migrateProfile,
+  migrateProjects,
   normalizeProfile,
   normalizeProject,
 } from "@/lib/normalize";
@@ -79,9 +80,8 @@ export default function PortfolioProvider({ children }: { children: ReactNode })
           setProfile(typeof data.v === "number" && data.v >= DATA_VERSION ? loaded : migrateProfile(loaded));
         }
         if (Array.isArray(data.projects)) {
-          setProjects(
-            data.projects.map(normalizeProject).filter((p): p is Project => p !== null)
-          );
+          const list = data.projects.map(normalizeProject).filter((p): p is Project => p !== null);
+          setProjects(typeof data.v === "number" && data.v >= DATA_VERSION ? list : migrateProjects(list));
         }
       }
     } catch {
