@@ -139,7 +139,7 @@ export function makeSlug(title: string, existing: string[]): string {
 }
 
 /** 저장 데이터 형식 버전. 기본값이 바뀌었을 때 옛 저장본을 한 번만 보정하는 데 씁니다. */
-export const DATA_VERSION = 30;
+export const DATA_VERSION = 31;
 
 const OLD_ROLE = "프론트엔드 개발자";
 const OLD_ROLE_V2 = "프론트 및 웹 앱 개발자";
@@ -367,6 +367,9 @@ export function migrateProfile(p: Profile): Profile {
 
   // v29 → v30: 한 줄 소개를 짧고 강하게 (이전 기본값일 때만 교체)
   if (next.tagline === "화면부터 서버까지, **끝까지** 만들어 내는 개발자") next.tagline = defaultProfile.tagline;
+
+  // v30 → v31: 한 줄 소개를 더 강하게 (이전 기본값일 때만 교체)
+  if (next.tagline === "화면부터 서버까지, **끝을 봅니다.**") next.tagline = defaultProfile.tagline;
 
   return next;
 }

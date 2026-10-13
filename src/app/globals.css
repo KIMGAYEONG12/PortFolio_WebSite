@@ -1476,7 +1476,29 @@ a.contact-mail {
 .hero-tagline em {
   font-style: normal;
   color: var(--gold);
-  background: linear-gradient(transparent 62%, rgba(176, 141, 87, 0.22) 62%);
+  background: linear-gradient(transparent 62%, rgba(176, 141, 87, 0.22) 62%) no-repeat 0 0 / 0% 100%;
+  animation: tagline-underline 0.9s 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-tagline em::after {
+  content: "";
+  display: inline-block;
+  width: 0.08em;
+  height: 0.9em;
+  margin-left: 0.12em;
+  vertical-align: -0.08em;
+  background: var(--gold);
+  animation: tagline-caret 1s steps(1) 0.9s 4 both;
+}
+@keyframes tagline-underline {
+  to { background-size: 100% 100%; }
+}
+@keyframes tagline-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-tagline em { animation: none; background-size: 100% 100%; }
+  .hero-tagline em::after { display: none; }
 }
 .hero-photo .avatar {
   box-shadow: none;
