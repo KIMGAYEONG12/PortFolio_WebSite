@@ -1477,17 +1477,26 @@ a.contact-mail {
   font-style: normal;
   color: var(--gold);
   background: linear-gradient(transparent 62%, rgba(176, 141, 87, 0.22) 62%) no-repeat 0 0 / 0% 100%;
-  animation: tagline-underline 0.9s 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: tagline-underline 0.7s var(--tl-end, 2s) cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.hero-tagline em::after {
-  content: "";
+/* 글자가 한 글자씩 쳐지듯 나타납니다 (자리는 미리 잡혀 있어 줄이 흔들리지 않습니다) */
+.tl-ch {
+  opacity: 0;
+  animation: tagline-type 0.01s linear forwards;
+  animation-delay: calc(var(--tl-start, 0.6s) + var(--i) * 0.06s);
+}
+.tl-caret {
   display: inline-block;
-  width: 0.08em;
-  height: 0.9em;
-  margin-left: 0.12em;
-  vertical-align: -0.08em;
+  width: 0.07em;
+  height: 0.95em;
+  margin-left: 0.1em;
+  vertical-align: -0.1em;
   background: var(--gold);
-  animation: tagline-caret 1s steps(1) 0.9s 4 both;
+  opacity: 0;
+  animation: tagline-caret 0.9s steps(1) var(--tl-start, 0.6s) 8 both;
+}
+@keyframes tagline-type {
+  to { opacity: 1; }
 }
 @keyframes tagline-underline {
   to { background-size: 100% 100%; }
@@ -1497,8 +1506,9 @@ a.contact-mail {
   50% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .tl-ch { opacity: 1; animation: none; }
+  .tl-caret { display: none; }
   .hero-tagline em { animation: none; background-size: 100% 100%; }
-  .hero-tagline em::after { display: none; }
 }
 .hero-photo .avatar {
   box-shadow: none;

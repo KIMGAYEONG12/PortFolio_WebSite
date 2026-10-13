@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import Avatar from "./Avatar";
 import { usePortfolio } from "./PortfolioProvider";
@@ -7,6 +8,15 @@ import { usePortfolio } from "./PortfolioProvider";
 export default function Hero() {
   const { profile, ready, canEdit } = usePortfolio();
   const longName = profile.name.length > 5;
+
+  // 한 줄 소개를 글자 단위로 쪼개 순서대로 나타내기 위한 시작 번호
+  const parts = profile.tagline.split(/\*\*(.+?)\*\*/g);
+  const offsets: number[] = [];
+  let typedLength = 0;
+  for (const part of parts) {
+    offsets.push(typedLength);
+    typedLength += Array.from(part).length;
+  }
 
   return (
     <section className="hero" aria-labelledby="hero-title">
@@ -27,10 +37,20 @@ export default function Hero() {
             </span>
           </h1>
           {profile.tagline && (
-            <p className="hero-tagline reveal reveal-3">
-              {profile.tagline.split(/\*\*(.+?)\*\*/g).map((part, i) =>
-                i % 2 ? <em key={i}>{part}</em> : part,
-              )}
+            <p
+              className="hero-tagline"
+              aria-label={profile.tagline.replace(/\*\*/g, "")}
+              style={{ "--tl-end": `${0.6 + typedLength * 0.06}s` } as CSSProperties}
+            >
+              {profile.tagline.split(/\*\*(.+?)\*\*/g).map((part, i) => {
+                const chars = Array.from(part).map((ch, j) => (
+                  <span key={j} className="tl-ch" aria-hidden="true" style={{ "--i": offsets[i] + j } as CSSProperties}>
+                    {ch}
+                  </span>
+                ));
+                return i % 2 ? <em key={i}>{chars}</em> : <span key={i}>{chars}</span>;
+              })}
+              <span className="tl-caret" aria-hidden="true" />
             </p>
           )}
           <div className="hero-actions reveal reveal-4">
