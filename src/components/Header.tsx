@@ -14,6 +14,8 @@ export default function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link href="/" className="wordmark">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="wordmark-logo" src="/logo.png" alt="" aria-hidden="true" />
           <span className="fade-swap" data-pending={!ready || undefined}>
             {profile.name}의 포트폴리오
           </span>

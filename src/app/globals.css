@@ -2169,3 +2169,16 @@ button.contact-mail {
   justify-content: flex-start;
   white-space: nowrap;
 }
+
+/* ── 상단 제목 앞 로고 ───────────── */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.wordmark-logo {
+  display: block;
+  height: 42px;
+  width: auto;
+  flex: none;
+}
