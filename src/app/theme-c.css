@@ -352,27 +352,13 @@ body {
   color: #1f33c2;
   border: 0;
 }
+/* "자세히 보기"는 히어로의 "이력서 보기"와 같은 버튼(.button .button-ghost)을 씁니다. 카드 어디에 올려도 눌린 것처럼 채워집니다. */
 .pcard-more {
   margin-top: 24px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  font-weight: 500;
 }
-.pcard-more b {
-  display: inline-grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
+.pcard-link:hover .pcard-more {
   background: var(--ink);
   color: #fff;
-  transition: transform 0.3s, background 0.3s;
-}
-.pcard-link:hover .pcard-more b {
-  transform: translateX(6px) rotate(-45deg);
-  background: var(--accent);
 }
 .pcard-phones {
   display: flex;
@@ -463,9 +449,6 @@ body {
     position: relative;
     top: auto;
     min-height: 0;
-  }
-  .pcard-link {
-    grid-template-columns: minmax(0, 1fr);
   }
   .pcard-phones {
     padding-bottom: 8px;
@@ -671,6 +654,14 @@ body {
   object-position: initial;
 }
 @media (max-width: 860px) {
+  .pcard-phones {
+    --ph: clamp(200px, 30vw, 300px);
+  }
+}
+@media (max-width: 600px) {
+  .pcard-link {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .pcard-phones {
     --ph: clamp(220px, 56vw, 330px);
   }
@@ -931,8 +922,10 @@ body {
 }
 .pd-next .pcard-more {
   margin-top: 0;
-  font-family: var(--font-sans);
-  color: var(--ink);
+}
+.pd-next .pcard-more:hover {
+  background: var(--ink);
+  color: #fff;
 }
 @media (max-width: 860px) {
   .pd-list > div {
@@ -945,6 +938,8 @@ body {
 .gwrap {
   position: relative;
   margin-block: 26px 10px;
+  --ph: clamp(260px, 38vw, 440px);
+  --gpad: 12px;
 }
 .gal {
   display: flex;
@@ -952,8 +947,9 @@ body {
   overflow-x: auto;
   scrollbar-width: none;
   scroll-snap-type: none;
-  --ph: clamp(240px, 34vw, 380px);
-  padding: 4px 2px 14px;
+  /* 양쪽 16px씩 밖으로 넓혀서 갤러리 상자가 좌우 대칭이 되게 합니다(화살표도 양쪽 끝에서 같은 간격) */
+  padding: var(--gpad) 16px 28px;
+  margin-inline: -16px;
 }
 .gal::-webkit-scrollbar {
   display: none;
@@ -963,36 +959,40 @@ body {
   width: auto;
   flex: 0 0 auto;
   border-radius: 12px;
-  box-shadow: 0 14px 30px rgba(14, 19, 34, 0.16);
-  scroll-snap-align: start;
+  box-shadow: 0 6px 16px rgba(14, 19, 34, 0.14);
+}
+/* 화살표 두 개는 그림 아래 가운데에 나란히 놓습니다 (D안). 같은 줄이라 위치가 항상 똑같습니다. */
+.garrows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 2px;
+  /* 화살표만 14px 위로 올리고(점은 원래 자리 그대로) */
+  position: relative;
+  top: -14px;
 }
 .garrow {
-  position: absolute;
-  top: calc(50% - 7px);
-  translate: 0 -50%;
+  flex: 0 0 auto;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
+  margin: 0;
+  padding: 0;
   border: 0;
+  border-radius: 50%;
   background: var(--ink);
   color: #fff;
-  font-size: 1.2rem;
-  line-height: 1;
   display: grid;
   place-items: center;
   box-shadow: 0 8px 20px rgba(14, 19, 34, 0.3);
   transition: background 0.25s;
-  z-index: 2;
   cursor: pointer;
+}
+.garrow svg {
+  display: block;
 }
 .garrow:hover {
   background: var(--accent);
-}
-.garrow.prev {
-  left: -6px;
-}
-.garrow.next {
-  right: -6px;
 }
 .gdots {
   display: flex;

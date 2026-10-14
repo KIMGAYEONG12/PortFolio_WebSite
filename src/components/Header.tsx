@@ -30,6 +30,11 @@ export default function Header() {
         </Link>
         <nav aria-label="주요 메뉴">
           <ul className="nav-list">
+            <li>
+              <button type="button" className="nav-link nav-link-btn" onClick={() => setResumeOpen(true)}>
+                이력서 보기
+              </button>
+            </li>
             {profile.navigation.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="nav-link">

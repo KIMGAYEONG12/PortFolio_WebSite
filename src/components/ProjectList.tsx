@@ -74,9 +74,7 @@ export default function ProjectList() {
                             </li>
                           ))}
                         </ul>
-                        <span className="pcard-more">
-                          <b aria-hidden="true">→</b>자세히 보기
-                        </span>
+                        <span className="button button-ghost pcard-more">자세히 보기</span>
                       </div>
                       <div className="pcard-phones" aria-hidden="true">
                         {srcs.map((src, i) => (

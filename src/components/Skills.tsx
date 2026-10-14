@@ -45,7 +45,7 @@ const LOGOS: Record<string, Logo> = {
   phpmyadmin: { src: `${WIKI}${encodeURI("PhpMyAdmin_logo.svg")}` },
   jupyter: dev("jupyter"),
   android: dev("android"),
-  "android studio": dev("androidstudio"),
+  "android studio": { src: "/skills/android-studio.svg" }, // 안드로이드 스튜디오에 들어 있는 구글 공식 아이콘
 };
 
 function Fallback() {

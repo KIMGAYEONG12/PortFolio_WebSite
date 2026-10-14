@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import PortfolioProvider from "@/components/PortfolioProvider";
 import MotionEffects from "@/components/MotionEffects";
 import Intro from "@/components/Intro";
+import AutoTour from "@/components/AutoTour";
 import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </a>
         <PortfolioProvider>
           <Intro />
+          <AutoTour />
           <MotionEffects />
           <Header />
           <main id="main">{children}</main>

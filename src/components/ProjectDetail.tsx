@@ -154,8 +154,7 @@ export default function ProjectDetail({ slug }: { slug: string }) {
       {next && (
         <nav className="pd-next" aria-label="다음 프로젝트">
           <span>다음 프로젝트</span>
-          <Link href={`/projects/${next.slug}`} className="pcard-more">
-            <b aria-hidden="true">→</b>
+          <Link href={`/projects/${next.slug}`} className="button button-ghost pcard-more">
             {next.title}
           </Link>
         </nav>

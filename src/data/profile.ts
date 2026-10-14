@@ -61,7 +61,7 @@ export const defaultProfile: Profile = {
   facts: [
     {
       label: "학력",
-      value: "대구대학교 정보통신공학전공 졸업 (2021.03 ~ 2025.02)",
+      value: "대구대학교 정보통신공학전공 졸업 (2021.03 ~ 2025.02) · 학점 3.04 / 4.5",
     },
     {
       label: "2026.03 ~ 2026.10",
@@ -70,11 +70,6 @@ export const defaultProfile: Profile = {
     {
       label: "2024.06 ~ 2024.11",
       value: "대구대학교 졸업 작품 · 아두이노와 MATLAB을 활용한 수경 재배 시스템 팀 제작, 시연·발표",
-    },
-    {
-      label: "협업 방식",
-      value:
-        "Figma 와이어프레임을 기준으로 작업을 나누고, 백엔드 API 명세를 함께 확인하며 작업합니다.",
     },
   ],
 
