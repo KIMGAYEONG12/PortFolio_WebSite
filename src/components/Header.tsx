@@ -10,6 +10,12 @@ export default function Header() {
   const pathname = usePathname();
   const onMy = pathname === "/my";
 
+  const avatar = (
+    <span className="fade-swap" data-pending={!ready || undefined}>
+      <Avatar photo={profile.photo} name={profile.name} size={40} x={profile.photoX} y={profile.photoY} zoom={profile.photoZoom} />
+    </span>
+  );
+
   return (
     <header className="site-header">
       <div className="container header-inner">
@@ -27,20 +33,22 @@ export default function Header() {
                 </Link>
               </li>
             ))}
-            {canEdit && (
             <li>
-              <Link
-                href="/my"
-                className={`nav-my ${onMy ? "is-active" : ""}`.trim()}
-                aria-current={onMy ? "page" : undefined}
-              >
-                <span className="fade-swap" data-pending={!ready || undefined}>
-                  <Avatar photo={profile.photo} name={profile.name} size={28} x={profile.photoX} y={profile.photoY} zoom={profile.photoZoom} />
-                </span>
-                <span className="nav-my-label">MY</span>
-              </Link>
+              {canEdit ? (
+                <Link
+                  href="/my"
+                  className={`nav-my ${onMy ? "is-active" : ""}`.trim()}
+                  aria-current={onMy ? "page" : undefined}
+                >
+                  {avatar}
+                  <span className="nav-my-label">MY</span>
+                </Link>
+              ) : (
+                <Link href="/" className="nav-photo" aria-label="맨 위로">
+                  {avatar}
+                </Link>
+              )}
             </li>
-            )}
           </ul>
         </nav>
       </div>

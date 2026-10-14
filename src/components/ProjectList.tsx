@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import ConfirmDialog from "./ConfirmDialog";
 import { EditIcon, PlusIcon, TrashIcon } from "./Icons";
 import { thumbnailOf } from "@/data/projects";
@@ -16,9 +16,12 @@ export default function ProjectList() {
   return (
     <section id="projects" className="section" aria-labelledby="projects-title">
       <div className="container section-grid">
-        <h2 id="projects-title" className="section-title">
-          프로젝트
-        </h2>
+        <div className="projects-head">
+          <h2 id="projects-title" className="section-title">
+            프로젝트
+          </h2>
+          <span className="projects-note">스크롤하면 카드가 쌓여요 · {projects.length}건</span>
+        </div>
         <div>
           {canEdit && (
             <div className="list-head">
@@ -35,46 +38,60 @@ export default function ProjectList() {
             </div>
           ) : (
             <ul className="project-list">
-              {projects.map((p) => (
-                <li key={p.slug}>
-                  {canEdit && (
-                  <div className="project-tools">
-                    <button type="button" className="btn btn-sm" onClick={() => setEditor({ slug: p.slug })}>
-                      <EditIcon size={14} /> 수정
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-sm btn-danger"
-                      onClick={() => setDeleting({ slug: p.slug, title: p.title })}
-                    >
-                      <TrashIcon size={14} /> DEL
-                    </button>
-                  </div>
-                  )}
-                  <Link href={`/projects/${p.slug}`} className="project-row">
-                    <div className="project-meta">
-                      <span>{p.period}</span>
-                      {p.type && <span>{p.type}</span>}
-                      {thumbnailOf(p) && (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img className="project-thumb" src={thumbnailOf(p)} alt={`${p.title} 화면`} loading="lazy" />
-                      )}
-                    </div>
-                    <div className="project-main">
-                      <h3 className="project-title">{p.title}</h3>
-                      <p className="project-summary">{p.summary}</p>
-                      <ul className="tags">
-                        {p.stack.map((s) => (
-                          <li key={s} className="tag">
-                            {s}
-                          </li>
+              {projects.map((p, n) => {
+                const thumb = thumbnailOf(p);
+                // 카드에는 프로젝트의 첫 화면(시세 농부는 스플래시) 1장을 크게 보여 줍니다
+                const srcs = p.images.length > 0 ? [p.images[0].src] : thumb ? [thumb] : [];
+                return (
+                  <li key={p.slug} className="pcard" style={{ "--n": n } as CSSProperties}>
+                    {canEdit && (
+                      <div className="project-tools">
+                        <button type="button" className="btn btn-sm" onClick={() => setEditor({ slug: p.slug })}>
+                          <EditIcon size={14} /> 수정
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-danger"
+                          onClick={() => setDeleting({ slug: p.slug, title: p.title })}
+                        >
+                          <TrashIcon size={14} /> DEL
+                        </button>
+                      </div>
+                    )}
+                    <Link href={`/projects/${p.slug}`} className="pcard-link">
+                      <div className="pcard-text">
+                        <p className="pcard-meta">
+                          {p.period}
+                          {p.type ? ` · ${p.type}` : ""}
+                        </p>
+                        <h3 className="pcard-title">{p.title}</h3>
+                        <p className="pcard-summary">{p.summary}</p>
+                        {p.role && <p className="pcard-role">{p.role}</p>}
+                        <ul className="tags">
+                          {p.stack.map((s) => (
+                            <li key={s} className="tag">
+                              {s}
+                            </li>
+                          ))}
+                        </ul>
+                        <span className="pcard-more">
+                          <b aria-hidden="true">→</b>자세히 보기
+                        </span>
+                      </div>
+                      <div className="pcard-phones" aria-hidden="true">
+                        {srcs.map((src, i) => (
+                          <figure key={src} className="pcard-phone">
+                            <div className="pcard-screen">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img src={src} alt="" loading={n === 0 || i === 0 ? "eager" : "lazy"} />
+                            </div>
+                          </figure>
                         ))}
-                      </ul>
-                    </div>
-                    <span className="project-more">자세히 보기</span>
-                  </Link>
-                </li>
-              ))}
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePortfolio } from "./PortfolioProvider";
-import ShotCarousel from "./ShotCarousel";
+import AutoGallery from "./AutoGallery";
 
 export default function ProjectDetail({ slug }: { slug: string }) {
   const { projects, ready } = usePortfolio();
@@ -40,37 +40,35 @@ export default function ProjectDetail({ slug }: { slug: string }) {
   const hasLinks = Boolean(project.live || project.github);
 
   return (
-    <article className="container detail">
-      <Link href="/#projects" className="back-link">
-        프로젝트 목록
-      </Link>
-
-      <div className={`detail-top${project.images.length > 0 ? " has-shots" : ""}`}>
-      <header className="detail-head">
-        {project.type && <p className="detail-type">{project.type}</p>}
-        <h1 className="detail-title">{project.title}</h1>
-        {project.summary && <p className="detail-summary">{project.summary}</p>}
-      </header>
-
-      {project.images.length > 0 && <ShotCarousel images={project.images} label={`${project.title} 앱 화면`} />}
+    <article className="container pd">
+      <div className="pd-bar">
+        <Link href="/#projects" className="pd-back">
+          ← 프로젝트 목록
+        </Link>
+        <span className="pd-pos">
+          {index + 1} / {projects.length}
+        </span>
       </div>
 
-      <dl className="meta-list">
-        {project.period && (
-          <div className="meta-row">
-            <dt>기간</dt>
-            <dd>{project.period}</dd>
-          </div>
-        )}
+      <p className="pd-type">
+        {project.period}
+        {project.type ? ` · ${project.type}` : ""}
+      </p>
+      <h1 className="pd-title">{project.title}</h1>
+      {project.summary && <p className="pd-summary">{project.summary}</p>}
+
+      {project.images.length > 0 && <AutoGallery images={project.images} label={`${project.title} 앱 화면`} />}
+
+      <dl className="pd-list">
         {project.role && (
-          <div className="meta-row">
-            <dt>맡은 역할</dt>
+          <div>
+            <dt>역할</dt>
             <dd>{project.role}</dd>
           </div>
         )}
         {project.stack.length > 0 && (
-          <div className="meta-row">
-            <dt>사용 기술</dt>
+          <div>
+            <dt>기술 스택</dt>
             <dd>
               <ul className="tags">
                 {project.stack.map((s) => (
@@ -82,18 +80,70 @@ export default function ProjectDetail({ slug }: { slug: string }) {
             </dd>
           </div>
         )}
+        {project.overview && (
+          <div>
+            <dt>개요</dt>
+            <dd>{project.overview}</dd>
+          </div>
+        )}
+        {project.responsibilities.length > 0 && (
+          <div>
+            <dt>담당 업무</dt>
+            <dd>
+              <ul className="pd-bul">
+                {project.responsibilities.map((r, i) => (
+                  <li key={`${i}-${r}`}>{r}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        )}
+        {project.problems.length > 0 && (
+          <div>
+            <dt>문제 해결</dt>
+            <dd>
+              {project.problems.map((p, i) => (
+                <div key={`${i}-${p.title}`} className="pd-prob">
+                  {p.title && <h3>{p.title}</h3>}
+                  {p.problem && (
+                    <p>
+                      <b>문제</b> {p.problem}
+                    </p>
+                  )}
+                  {p.solution && (
+                    <p>
+                      <b>해결</b> {p.solution}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </dd>
+          </div>
+        )}
+        {project.retrospective.length > 0 && (
+          <div>
+            <dt>회고</dt>
+            <dd>
+              <ul className="pd-bul">
+                {project.retrospective.map((r, i) => (
+                  <li key={`${i}-${r}`}>{r}</li>
+                ))}
+              </ul>
+            </dd>
+          </div>
+        )}
         {hasLinks && (
-          <div className="meta-row">
+          <div>
             <dt>링크</dt>
-            <dd className="link-group">
+            <dd className="pd-links">
               {project.live && (
-                <a className="text-link" href={project.live} target="_blank" rel="noopener noreferrer">
-                  배포 사이트
+                <a className="button" href={project.live} target="_blank" rel="noopener noreferrer">
+                  배포 사이트 열기
                 </a>
               )}
               {project.github && (
-                <a className="text-link" href={project.github} target="_blank" rel="noopener noreferrer">
-                  GitHub 저장소
+                <a className="button button-ghost" href={project.github} target="_blank" rel="noopener noreferrer">
+                  GitHub
                 </a>
               )}
             </dd>
@@ -101,66 +151,11 @@ export default function ProjectDetail({ slug }: { slug: string }) {
         )}
       </dl>
 
-      {project.overview && (
-        <section className="detail-section">
-          <h2 className="detail-h2">프로젝트 소개</h2>
-          <p className="prose">{project.overview}</p>
-        </section>
-      )}
-
-      {project.responsibilities.length > 0 && (
-        <section className="detail-section">
-          <h2 className="detail-h2">담당한 작업</h2>
-          <ul className="bullets">
-            {project.responsibilities.map((r, i) => (
-              <li key={`${i}-${r}`}>{r}</li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {project.problems.length > 0 && (
-        <section className="detail-section">
-          <h2 className="detail-h2">문제 해결 경험</h2>
-          <ul className="problems">
-            {project.problems.map((p, i) => (
-              <li key={`${i}-${p.title}`} className="problem">
-                {p.title && <h3 className="problem-title">{p.title}</h3>}
-                <dl className="problem-body">
-                  {p.problem && (
-                    <>
-                      <dt>문제</dt>
-                      <dd>{p.problem}</dd>
-                    </>
-                  )}
-                  {p.solution && (
-                    <>
-                      <dt>해결</dt>
-                      <dd>{p.solution}</dd>
-                    </>
-                  )}
-                </dl>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {project.retrospective.length > 0 && (
-        <section className="detail-section">
-          <h2 className="detail-h2">아쉬운 점과 개선 계획</h2>
-          <ul className="bullets">
-            {project.retrospective.map((r, i) => (
-              <li key={`${i}-${r}`}>{r}</li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       {next && (
-        <nav className="next-project" aria-label="다음 프로젝트">
-          <p className="muted">다음 프로젝트</p>
-          <Link href={`/projects/${next.slug}`} className="next-link">
+        <nav className="pd-next" aria-label="다음 프로젝트">
+          <span>다음 프로젝트</span>
+          <Link href={`/projects/${next.slug}`} className="pcard-more">
+            <b aria-hidden="true">→</b>
             {next.title}
           </Link>
         </nav>

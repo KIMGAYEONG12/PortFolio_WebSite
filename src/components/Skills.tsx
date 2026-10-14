@@ -86,7 +86,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="section" aria-labelledby="skills-title">
-      <div className="container section-grid">
+      <div className="container section-grid reveal-on-scroll">
         <h2 id="skills-title" className="section-title">
           기술
         </h2>

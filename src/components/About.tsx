@@ -1,16 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import ResumeModal from "./ResumeModal";
 import { usePortfolio } from "./PortfolioProvider";
 
 export default function About() {
   const { profile } = usePortfolio();
-  const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
     <section id="about" className="section" aria-labelledby="about-title">
-      <div className="container section-grid">
+      <div className="container section-grid reveal-on-scroll">
         <h2 id="about-title" className="section-title">
           경험 · 활동 · 교육
         </h2>
@@ -34,14 +31,8 @@ export default function About() {
               ))}
             </dl>
           )}
-          <div className="resume-actions">
-            <button type="button" className="btn btn-primary" onClick={() => setResumeOpen(true)}>
-              이력서 보기
-            </button>
-          </div>
         </div>
       </div>
-      {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
     </section>
   );
 }

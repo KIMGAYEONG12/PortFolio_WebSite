@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import "./theme-c.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PortfolioProvider from "@/components/PortfolioProvider";
+import MotionEffects from "@/components/MotionEffects";
+import Intro from "@/components/Intro";
 import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
@@ -38,7 +41,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@200;300;400;500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Serif+KR:wght@200;300;400;500;700&display=swap"
         />
         <link
           rel="stylesheet"
@@ -50,6 +53,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           본문으로 건너뛰기
         </a>
         <PortfolioProvider>
+          <Intro />
+          <MotionEffects />
           <Header />
           <main id="main">{children}</main>
           <Footer />

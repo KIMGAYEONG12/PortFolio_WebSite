@@ -33,10 +33,10 @@ export type Profile = {
 export const defaultProfile: Profile = {
   name: "김가영",
   nameEn: "Gayeong Kim",
-  role: "개발자",
-  roleEn: "Developer",
+  role: "웹 퍼블리셔",
+  roleEn: "UI / UX, FM, PM",
   // 비워 두면 화면에서 자동으로 숨겨집니다.
-  tagline: "아이디어를 서비스로, **끝까지 만듭니다.**",
+  tagline: "UI 설계부터 마크업까지, 화면을 **끝까지** 구현하는 퍼블리셔",
   intro:
     "개인 프로젝트로 Flutter와 Firebase를 사용해 공영도매시장 실시간 시세를 반영한 농장 게임 시세 농부를 개발하고 있습니다. 완성한 뒤 출시할 계획이 있습니다. Next.js와 TypeScript로 화면을 만들어 왔습니다.",
   description:
@@ -61,28 +61,20 @@ export const defaultProfile: Profile = {
   facts: [
     {
       label: "학력",
-      value: "대구대학교 정보통신공학전공 졸업 (2021.03 ~ 2025.02) · 학점 3.04 / 4.5",
+      value: "대구대학교 정보통신공학전공 졸업 (2021.03 ~ 2025.02)",
     },
     {
       label: "2026.03 ~ 2026.10",
-      value: "대구 영진 직업 전문학교 · 생성형 AI 기반 UI/UX 디자인 웹 앱 개발 과정 수료 (교육)",
+      value: "대구 영진 직업 전문학교 · 생성형 AI 기반 UI/UX 디자인 웹 앱 개발 과정 수료",
     },
     {
       label: "2024.06 ~ 2024.11",
-      value: "대구대학교 졸업 작품 · 아두이노와 MATLAB을 활용한 수경 재배 시스템을 팀으로 제작, 시연·발표 (교내활동)",
-    },
-    {
-      label: "2022.01 ~ 2025.12",
-      value: "레뷰 도서 리뷰 · 제품 체험단 리뷰 활동 (사회활동)",
-    },
-    {
-      label: "2021.07",
-      value: "코드잇 1기 대학생 코딩 캠프(온라인) · Python, C 언어 학습, 수료 (교육)",
+      value: "대구대학교 졸업 작품 · 아두이노와 MATLAB을 활용한 수경 재배 시스템 팀 제작, 시연·발표",
     },
     {
       label: "협업 방식",
       value:
-        "Figma 와이어프레임을 기준으로 화면 단위를 나누고, 백엔드 API 명세를 함께 확인하며 작업합니다.",
+        "Figma 와이어프레임을 기준으로 작업을 나누고, 백엔드 API 명세를 함께 확인하며 작업합니다.",
     },
   ],
 

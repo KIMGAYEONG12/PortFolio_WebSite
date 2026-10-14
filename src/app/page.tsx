@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import ProjectList from "@/components/ProjectList";
 import Skills from "@/components/Skills";
@@ -8,6 +9,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <Marquee />
       <ProjectList />
       <About />
       <Skills />

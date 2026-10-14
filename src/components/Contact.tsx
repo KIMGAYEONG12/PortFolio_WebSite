@@ -9,12 +9,12 @@ export default function Contact() {
   const [composing, setComposing] = useState(false);
 
   return (
-    <section id="contact" className="section" aria-labelledby="contact-title">
-      <div className="container section-grid">
-        <h2 id="contact-title" className="section-title">
+    <section id="contact" className="section contact" aria-labelledby="contact-title">
+      <div className="container section-grid reveal-on-scroll">
+        <h2 id="contact-title" className="section-title visually-hidden">
           연락
         </h2>
-        <div>
+        <div className="contact-body">
           <p className="prose lead">함께 일할 기회나 궁금한 점이 있다면 편하게 연락 주세요.</p>
           {profile.email && (
             <button type="button" className="contact-mail" onClick={() => setComposing(true)}>
@@ -24,7 +24,7 @@ export default function Contact() {
           {profile.github && (
             <div>
               <a
-                className="contact-mail contact-github"
+                className="contact-gh"
                 href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"

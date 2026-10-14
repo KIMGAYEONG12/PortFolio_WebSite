@@ -33,19 +33,20 @@ export const defaultThumbnails: Record<string, string> = {
   joinus: "/projects/joinus.png",
 };
 
-/** 시세 농부 앱 화면 (튜토리얼 → 농장 → 작물 성장 → 작물 관리·바로가기 → 하우스 → 창고 → 상점 → MY 순서) */
+/** 시세 농부 앱 화면 (스플래시 → 농장 → 상점 → 튜토리얼 → 작물 성장 → 작물 관리·바로가기 → 하우스 → 창고 → MY 순서) */
 export const siseNongbuShots: ProjectImage[] = [
+  { src: "/projects/sise/splash.jpg", alt: "시작(스플래시) 화면" },
+  { src: "/projects/sise/farm.webp", alt: "농장 화면" },
+  { src: "/projects/sise/shop.webp", alt: "상점 화면" },
   { src: "/projects/sise/tutorial-1.webp", alt: "튜토리얼 1: 오늘의 시세 확인" },
   { src: "/projects/sise/tutorial-2.webp", alt: "튜토리얼 2" },
   { src: "/projects/sise/tutorial-3.webp", alt: "튜토리얼 3" },
   { src: "/projects/sise/tutorial-4.webp", alt: "튜토리얼 4" },
   { src: "/projects/sise/tutorial-5.webp", alt: "튜토리얼 5" },
-  { src: "/projects/sise/farm.webp", alt: "농장 화면" },
   { src: "/projects/sise/crop-growth.webp", alt: "작물 성장 화면" },
   { src: "/projects/sise/farm-menu.webp", alt: "작물 관리와 바로가기" },
   { src: "/projects/sise/greenhouse.webp", alt: "하우스 상세 보기" },
   { src: "/projects/sise/storage.webp", alt: "창고 화면" },
-  { src: "/projects/sise/shop.webp", alt: "상점 화면" },
   { src: "/projects/sise/my.webp", alt: "MY 화면" },
 ];
 
