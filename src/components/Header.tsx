@@ -1,14 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Avatar from "./Avatar";
 import { usePortfolio } from "./PortfolioProvider";
+import ResumeModal from "./ResumeModal";
 
 export default function Header() {
   const { profile, ready, canEdit } = usePortfolio();
   const pathname = usePathname();
   const onMy = pathname === "/my";
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   const avatar = (
     <span className="fade-swap" data-pending={!ready || undefined}>
@@ -17,6 +20,7 @@ export default function Header() {
   );
 
   return (
+    <>
     <header className="site-header">
       <div className="container header-inner">
         <Link href="/" className="wordmark">
@@ -33,6 +37,11 @@ export default function Header() {
                 </Link>
               </li>
             ))}
+            <li>
+              <button type="button" className="nav-link nav-link-btn" onClick={() => setResumeOpen(true)}>
+                이력서 보기
+              </button>
+            </li>
             <li>
               {canEdit ? (
                 <Link
@@ -53,5 +62,8 @@ export default function Header() {
         </nav>
       </div>
     </header>
+      {/* 헤더의 흐림 효과 안에 넣으면 창 위치가 틀어져서 헤더 밖에 둡니다 */}
+      {resumeOpen && <ResumeModal onClose={() => setResumeOpen(false)} />}
+    </>
   );
 }

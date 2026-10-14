@@ -1107,3 +1107,13 @@ html.intro-on .hero-actions {
     animation: none;
   }
 }
+
+/* 헤더 메뉴의 "이력서 보기" 버튼 (다른 메뉴 글씨와 같은 모양) */
+.nav-link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
